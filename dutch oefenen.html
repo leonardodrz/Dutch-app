@@ -1,0 +1,2715 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nederlands Oefenen — Delftse Methode L1–26</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#58CC02;--green-dark:#46A302;--blue:#1CB0F6;--blue-dark:#0E98D8;
+    --red:#FF4B4B;--yellow:#FFC800;--yellow-light:#FFF9D8;--purple:#CE82FF;--orange:#FF9600;
+    --bg:#131F24;--card:#1F2E35;--card2:#243640;--border:#37464F;
+    --text:#F1F7FB;--text-muted:#8FA3AD;--radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;}
+  .header{width:100%;max-width:720px;display:flex;align-items:center;justify-content:space-between;padding:16px 18px 8px;gap:14px;}
+  .close-btn{background:none;border:none;font-size:24px;cursor:pointer;color:var(--text-muted);padding:4px;border-radius:8px;line-height:1;transition:color .15s;}
+  .close-btn:hover{color:var(--text);}
+  .progress-bar-wrap{flex:1;height:14px;background:var(--border);border-radius:99px;overflow:hidden;}
+  .progress-bar-fill{height:100%;background:var(--green);border-radius:99px;transition:width .4s cubic-bezier(.34,1.4,.64,1);}
+  .header-stat{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;white-space:nowrap;display:flex;align-items:center;gap:5px;color:var(--orange);}
+  .main{width:100%;max-width:720px;padding:16px 18px 150px;flex:1;}
+  .screen{display:none;animation:fadeIn .25s ease;}
+  .screen.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .home-hero{text-align:center;margin-bottom:22px;}
+  .flag{font-size:40px;margin-bottom:4px;}
+  .home-hero h1{font-family:'Nunito',sans-serif;font-weight:900;font-size:25px;margin-bottom:4px;}
+  .home-hero p{color:var(--text-muted);font-size:14px;line-height:1.5;}
+  .action-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:26px;}
+  .action-card{border:2px solid var(--border);border-bottom-width:4px;border-radius:var(--radius);padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:all .12s;text-align:left;background:var(--card);width:100%;color:var(--text);font-family:inherit;}
+  .action-card:active{transform:translateY(2px);border-bottom-width:2px;}
+  .action-card .ac-icon{font-size:28px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:14px;flex-shrink:0;}
+  .action-card .ac-body{flex:1;}
+  .action-card .ac-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:17px;margin-bottom:2px;}
+  .action-card .ac-sub{font-size:13px;color:var(--text-muted);line-height:1.4;}
+  .action-card .ac-badge{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;padding:4px 12px;border-radius:99px;flex-shrink:0;}
+  .ac-review{border-color:var(--orange);} .ac-review .ac-icon{background:rgba(255,150,0,.15);} .ac-review .ac-badge{background:var(--orange);color:#2b1900;}
+  .ac-review.empty{border-color:var(--border);opacity:.55;} .ac-review.empty:active{transform:none;border-bottom-width:4px;}
+  .ac-train{border-color:var(--purple);} .ac-train .ac-icon{background:rgba(206,130,255,.15);} .ac-train .ac-badge{background:var(--purple);color:#2d1745;}
+  .ac-verb{border-color:var(--blue);} .ac-verb .ac-icon{background:rgba(28,176,246,.15);} .ac-verb .ac-badge{background:var(--blue);color:#04344d;}
+  .section-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-muted);margin:0 4px 12px;}
+  .unit-section{margin-bottom:24px;}
+  .unit-label{display:flex;align-items:center;gap:8px;color:white;border-radius:12px;padding:11px 16px;margin-bottom:14px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;letter-spacing:.4px;text-transform:uppercase;}
+  .unit-label.green{background:var(--green-dark);} .unit-label.blue{background:var(--blue-dark);} .unit-label.purple{background:#9d4edd;} .unit-label.orange{background:#d97500;}
+  .lesson-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(min-width:520px){.lesson-grid{grid-template-columns:1fr 1fr 1fr;}}
+  .lesson-btn{background:var(--card);border:2px solid var(--border);border-bottom-width:4px;border-radius:var(--radius);padding:13px 12px;cursor:pointer;font-family:'Nunito',sans-serif;color:var(--text);transition:all .12s;text-align:center;position:relative;}
+  .lesson-btn:active{transform:translateY(2px);border-bottom-width:2px;}
+  .lesson-btn .les-num{font-size:20px;font-weight:900;display:block;}
+  .lesson-btn .les-topic{font-size:11px;font-weight:700;color:var(--text-muted);margin-top:2px;line-height:1.2;}
+  .lesson-btn .les-mastery{margin-top:7px;height:5px;border-radius:99px;background:var(--border);overflow:hidden;}
+  .lesson-btn .les-mastery>div{height:100%;background:var(--green);border-radius:99px;transition:width .4s;}
+  .lesson-btn.mastered{border-color:var(--green);} .lesson-btn.mastered .les-num{color:var(--green);}
+  .lesson-btn .les-check{position:absolute;top:-7px;right:-7px;font-size:14px;background:var(--green);border-radius:50%;width:22px;height:22px;display:none;align-items:center;justify-content:center;color:#04340a;}
+  .lesson-btn.mastered .les-check{display:flex;}
+  .ex-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
+  .ex-type-badge{display:inline-block;background:var(--blue);color:#04344d;font-size:11px;font-weight:800;padding:4px 11px;border-radius:99px;margin-bottom:16px;font-family:'Nunito',sans-serif;letter-spacing:.5px;text-transform:uppercase;}
+  .ex-type-badge.review{background:var(--orange);color:#2b1900;} .ex-type-badge.verb{background:var(--blue);color:#04344d;}
+  .ex-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:22px;line-height:1.35;margin-bottom:22px;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{background:var(--card);border:2px solid var(--border);border-bottom-width:4px;border-radius:var(--radius);padding:15px 18px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:17px;font-weight:600;color:var(--text);text-align:left;transition:all .1s;display:flex;align-items:center;gap:13px;width:100%;}
+  .option-btn:active:not(:disabled){transform:translateY(2px);border-bottom-width:2px;}
+  .option-btn.selected{border-color:var(--blue);background:rgba(28,176,246,.12);color:var(--blue);}
+  .option-btn.correct{border-color:var(--green)!important;background:rgba(88,204,2,.15)!important;color:var(--green)!important;}
+  .option-btn.wrong{border-color:var(--red)!important;background:rgba(255,75,75,.12)!important;color:var(--red)!important;}
+  .option-btn:disabled{cursor:default;}
+  .opt-letter{width:28px;height:28px;border-radius:8px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;flex-shrink:0;color:var(--text-muted);}
+  .word-bank-sentence{background:var(--card);border:2px solid var(--border);border-radius:var(--radius);min-height:64px;padding:14px 16px;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:'Nunito',sans-serif;}
+  .word-placed{background:var(--blue);color:#04344d;border-radius:10px;padding:6px 13px;font-size:16px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;border:2px solid var(--blue-dark);}
+  .word-placed:active{opacity:.8;}
+  .word-bank{display:flex;flex-wrap:wrap;gap:8px;}
+  .word-chip{background:var(--card);border:2px solid var(--border);border-bottom-width:4px;border-radius:12px;padding:9px 16px;font-family:'Nunito',sans-serif;font-weight:700;font-size:16px;cursor:pointer;transition:all .1s;color:var(--text);}
+  .word-chip:active:not(.used){transform:translateY(2px);border-bottom-width:2px;}
+  .word-chip.used{opacity:.25;pointer-events:none;}
+  .fill-sentence{font-family:'Nunito',sans-serif;font-size:21px;font-weight:700;line-height:1.7;margin-bottom:8px;}
+  .blank-input{border:none;border-bottom:3px solid var(--blue);background:var(--card);font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;color:var(--blue);width:160px;text-align:center;outline:none;padding:4px 8px;margin:0 4px;border-radius:8px 8px 0 0;}
+  .blank-input.correct{border-color:var(--green);color:var(--green);}
+  .blank-input.wrong{border-color:var(--red);color:var(--red);}
+  .fill-hint{font-size:13px;color:var(--text-muted);margin-top:10px;font-style:italic;}
+  .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .match-col{display:flex;flex-direction:column;gap:10px;}
+  .match-chip{background:var(--card);border:2px solid var(--border);border-bottom-width:4px;border-radius:12px;padding:14px 12px;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:all .1s;color:var(--text);min-height:52px;display:flex;align-items:center;justify-content:center;}
+  .match-chip:active:not(.matched-correct){transform:translateY(2px);border-bottom-width:2px;}
+  .match-chip.selected{border-color:var(--blue);background:rgba(28,176,246,.12);color:var(--blue);}
+  .match-chip.matched-correct{border-color:var(--green)!important;background:rgba(88,204,2,.12)!important;color:var(--green)!important;opacity:.5;pointer-events:none;}
+  .match-chip.matched-wrong{border-color:var(--red)!important;background:rgba(255,75,75,.12)!important;animation:shake .3s;}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .grammar-tip{background:var(--yellow-light);border-radius:var(--radius);padding:16px 18px;margin-bottom:20px;color:#3a2e00;}
+  .grammar-tip strong{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;display:block;margin-bottom:8px;}
+  .grammar-tip table{width:100%;border-collapse:collapse;}
+  .grammar-tip td,.grammar-tip th{padding:6px 9px;font-size:13px;border:1px solid rgba(0,0,0,.12);text-align:left;}
+  .grammar-tip th{background:rgba(0,0,0,.06);font-weight:800;}
+  .grammar-tip td:first-child{font-weight:700;}
+  .feedback{position:fixed;bottom:0;left:0;right:0;padding:0;display:none;z-index:100;}
+  .feedback.active{display:block;}
+  .feedback-inner{max-width:720px;margin:0 auto;padding:18px;border-radius:20px 20px 0 0;}
+  .feedback-inner.correct{background:#16312b;border-top:2px solid var(--green);}
+  .feedback-inner.wrong{background:#3a1f24;border-top:2px solid var(--red);}
+  .feedback-head{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+  .feedback-icon{font-size:26px;}
+  .feedback-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;}
+  .feedback-inner.correct .feedback-title{color:var(--green);} .feedback-inner.wrong .feedback-title{color:var(--red);}
+  .feedback-answer{font-family:'Nunito',sans-serif;font-weight:700;font-size:15px;margin-bottom:6px;}
+  .feedback-note{font-size:14px;color:var(--text-muted);line-height:1.5;margin-bottom:14px;}
+  .continue-btn,.check-btn,.btn-primary{display:block;width:100%;max-width:720px;margin:0 auto;background:var(--green);border:none;border-bottom:4px solid var(--green-dark);border-radius:14px;padding:16px;font-family:'Nunito',sans-serif;font-weight:900;font-size:16px;color:#fff;cursor:pointer;transition:all .1s;letter-spacing:.5px;}
+  .continue-btn:active,.check-btn:active,.btn-primary:active{transform:translateY(2px);border-bottom-width:2px;}
+  .continue-btn.wrong-btn{background:var(--red);border-bottom-color:#CC3B3B;}
+  .check-area{position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--border);padding:14px 18px;display:none;z-index:50;}
+  .check-area.visible{display:block;}
+  .check-btn:disabled{background:var(--border);border-bottom-color:#2a363c;color:var(--text-muted);cursor:default;}
+  .check-btn.flip{background:var(--blue);border-bottom-color:var(--blue-dark);color:#04344d;}
+  .skip-btn{background:none;border:none;color:var(--text-muted);font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer;display:block;margin:10px auto 0;text-decoration:underline;}
+  .results{text-align:center;padding:30px 16px;}
+  .result-icon{font-size:64px;margin-bottom:14px;animation:bounceIn .5s;}
+  @keyframes bounceIn{0%{transform:scale(0)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+  .results h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:28px;margin-bottom:8px;}
+  .results p{color:var(--text-muted);font-size:15px;margin-bottom:26px;line-height:1.5;}
+  .stats-row{display:flex;gap:12px;justify-content:center;margin-bottom:26px;flex-wrap:wrap;}
+  .stat-card{background:var(--card);border:2px solid var(--border);border-radius:var(--radius);padding:14px 22px;min-width:100px;}
+  .stat-card .num{font-family:'Nunito',sans-serif;font-weight:900;font-size:26px;}
+  .stat-card .num.green{color:var(--green);} .stat-card .num.red{color:var(--red);} .stat-card .num.orange{color:var(--orange);}
+  .stat-card .label{font-size:12px;color:var(--text-muted);font-weight:600;margin-top:2px;}
+  .btn-row{display:flex;flex-direction:column;gap:10px;max-width:360px;margin:0 auto;}
+  .btn-secondary{background:var(--card);border:2px solid var(--border);border-bottom-width:4px;border-radius:14px;padding:14px;font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:var(--text);cursor:pointer;transition:all .1s;}
+  .btn-secondary:active{transform:translateY(2px);border-bottom-width:2px;}
+  .review-list{text-align:left;max-width:480px;margin:0 auto 26px;}
+  .review-item{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--red);border-radius:12px;padding:12px 14px;margin-bottom:8px;}
+  .review-item .ri-q{font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;margin-bottom:4px;}
+  .review-item .ri-a{font-size:13px;color:var(--green);font-weight:700;}
+  /* selector (config) screen */
+  .config-intro{color:var(--text-muted);font-size:14px;line-height:1.5;margin-bottom:18px;}
+  .chip-grid{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:18px;}
+  .sel-chip{background:var(--card);border:2px solid var(--border);border-bottom-width:4px;border-radius:12px;padding:11px 14px;font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;color:var(--text);cursor:pointer;transition:all .1s;}
+  .sel-chip:active{transform:translateY(2px);border-bottom-width:2px;}
+  .sel-chip.on{border-color:var(--purple);background:rgba(206,130,255,.16);color:#e9c6ff;}
+  .sel-chip.on.verbtense{border-color:var(--blue);background:rgba(28,176,246,.16);color:#bfe9ff;}
+  .config-row{display:flex;gap:10px;margin-bottom:14px;}
+  .config-row .btn-secondary{flex:1;padding:11px;font-size:13px;}
+  .tense-chip{width:100%;text-align:left;display:flex;flex-direction:column;gap:2px;}
+  .tense-chip .tc-sub{font-size:12px;font-weight:600;color:var(--text-muted);}
+  .tense-chip.on .tc-sub{color:inherit;opacity:.8;}
+  .verb-card{background:var(--card);border:2px solid var(--border);border-radius:20px;padding:30px 20px;text-align:center;margin-bottom:18px;}
+  .verb-card .vc-inf{font-family:'Nunito',sans-serif;font-weight:900;font-size:30px;margin-bottom:4px;}
+  .verb-card .vc-en{font-size:15px;color:var(--text-muted);margin-bottom:8px;}
+  .verb-card .vc-tag{display:inline-block;font-size:11px;font-weight:800;padding:3px 10px;border-radius:99px;font-family:'Nunito',sans-serif;text-transform:uppercase;letter-spacing:.5px;}
+  .verb-card .vc-tag.irr{background:rgba(255,150,0,.2);color:var(--orange);}
+  .verb-card .vc-tag.reg{background:rgba(88,204,2,.2);color:var(--green);}
+  @media(max-width:400px){.ex-title{font-size:20px}.match-chip{font-size:13px;padding:12px 8px}}
+</style>
+</head>
+<body>
+<div class="header" id="mainHeader">
+  <button class="close-btn" onclick="goHome()">&times;</button>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
+  <div class="header-stat" id="headerStat"></div>
+</div>
+<div class="main">
+  <div class="screen active" id="homeScreen">
+    <div class="home-hero"><div class="flag">&#127475;&#127473;</div><h1>Nederlands Oefenen</h1><p>Delftse Methode &bull; Lessen 1&ndash;26<br>Herhaling is de sleutel</p></div>
+    <div class="action-cards">
+      <button class="action-card ac-review" id="reviewCard" onclick="startReview()"><div class="ac-icon">&#128260;</div><div class="ac-body"><div class="ac-title">Foutenrevisie</div><div class="ac-sub" id="reviewSub">Oefen de woorden die je fout had</div></div><div class="ac-badge" id="reviewBadge">0</div></button>
+      <button class="action-card ac-verb" onclick="openVerbConfig()"><div class="ac-icon">&#9889;</div><div class="ac-body"><div class="ac-title">Werkwoorden trainen</div><div class="ac-sub">Betekenis &amp; tijden &bull; kies welke tijden</div></div><div class="ac-badge">&#9889;</div></button>
+      <button class="action-card ac-train" onclick="openTrainConfig()"><div class="ac-icon">&#9851;</div><div class="ac-body"><div class="ac-title">Oneindig trainen</div><div class="ac-sub">Kies welke lessen je mengt &bull; blijft herhalen</div></div><div class="ac-badge">&#8734;</div></button>
+    </div>
+    <div class="section-label">Kies een les</div>
+    <div id="unitsContainer"></div>
+  </div>
+
+  <div class="screen" id="configScreen">
+    <div class="ex-label" id="configLabel"></div>
+    <div class="ex-title" id="configTitle"></div>
+    <div class="config-intro" id="configIntro"></div>
+    <div class="config-row">
+      <button class="btn-secondary" onclick="configSelectAll()">Alles selecteren</button>
+      <button class="btn-secondary" onclick="configSelectNone()">Alles wissen</button>
+    </div>
+    <div class="chip-grid" id="configChips"></div>
+  </div>
+
+  <div class="screen" id="exerciseScreen">
+    <div class="ex-label" id="exLabel"></div>
+    <div id="exTypeBadge" class="ex-type-badge"></div>
+    <div class="ex-title" id="exTitle"></div>
+    <div id="exContent"></div>
+  </div>
+
+  <div class="screen" id="resultsScreen">
+    <div class="results">
+      <div class="result-icon" id="resultIcon">&#127881;</div>
+      <h2 id="resultTitle"></h2>
+      <p id="resultSubtitle"></p>
+      <div class="stats-row">
+        <div class="stat-card"><div class="num green" id="statCorrect">0</div><div class="label">Goed</div></div>
+        <div class="stat-card"><div class="num red" id="statWrong">0</div><div class="label">Fout</div></div>
+        <div class="stat-card"><div class="num orange" id="statReview">0</div><div class="label">Te herhalen</div></div>
+      </div>
+      <div id="reviewListContainer"></div>
+      <div class="btn-row">
+        <button class="btn-primary" id="resultPrimary" onclick="resultPrimaryAction()"></button>
+        <button class="btn-secondary" onclick="goHome()">&#127968; Terug naar home</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="feedback" id="feedbackPanel">
+  <div class="feedback-inner" id="feedbackInner">
+    <div class="feedback-head"><div class="feedback-icon" id="feedbackIcon"></div><div class="feedback-title" id="feedbackTitle"></div></div>
+    <div class="feedback-answer" id="feedbackAnswer"></div>
+    <div class="feedback-note" id="feedbackNote"></div>
+    <button class="continue-btn" id="continueBtn" onclick="nextQuestion()">VERDER</button>
+  </div>
+</div>
+
+<div class="check-area" id="checkArea">
+  <button class="check-btn" id="checkBtn" disabled onclick="primaryButtonAction()">CONTROLEER</button>
+  <button class="skip-btn" id="skipBtn" onclick="skipQuestion()" style="display:none">Ik weet het niet — toon antwoord</button>
+</div>
+
+<script>
+const LESSONS = {
+
+  1: { // Hoe heet je? — Intro, verbs zijn/heten/komen/wonen, numbers
+    title: "Les 1 – Hoe heet je?",
+    grammarTip: {
+      title: "🔑 Werkwoorden: zijn, heten, komen, wonen",
+      table: [
+        ["ik", "ben", "heet", "kom", "woon"],
+        ["jij/je", "bent", "heet", "komt", "woont"],
+        ["hij/zij", "is", "heet", "komt", "woont"],
+        ["wij/we", "zijn", "heten", "komen", "wonen"],
+      ],
+      headers: ["", "zijn", "heten", "komen", "wonen"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'What is your name?' in het Nederlands?",
+        options: ["Hoe laat is het?", "Hoe heet je?", "Waar woon je?", "Uit welk land kom je?"],
+        correct: 1,
+        explanation: "'Hoe heet je?' = What is your name? • 'Heet' comes from the verb 'heten'."
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik ___ Paula. (Mijn naam IS Paula)",
+        options: ["ben", "heet", "kom", "woon"],
+        correct: 1,
+        explanation: "'Ik heet Paula' = My name is Paula. Both 'ben' and 'heet' work, but 'heten' is most natural for names."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Ik ", " uit Nederland."],
+        blank: "kom",
+        hint: "werkwoord: komen (ik-vorm)",
+        explanation: "'Ik kom uit...' = I come from... — this is how you say where you're from."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat is het getal 15 in het Nederlands?",
+        options: ["twintig", "vijftien", "vijftig", "veertig"],
+        correct: 1,
+        explanation: "vijftien = 15. Let op: vijftig = 50. Don't mix them up!"
+      },
+      {
+        type: "word_order",
+        question: "Zet de woorden in de goede volgorde:",
+        words: ["naam", "Mijn", "Paula.", "is"],
+        correct: "Mijn naam is Paula.",
+        explanation: "In Dutch declarative sentences, the verb 'is' comes third. Subject → complement → verb order here is natural."
+      },
+      {
+        type: "multiple_choice",
+        question: "Meneer Wang woont ___ Den Haag.",
+        options: ["uit", "in", "op", "naar"],
+        correct: 1,
+        explanation: "'wonen IN' + city. Example: Ik woon in Amsterdam."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Zij ", " de docent."],
+        blank: "is",
+        hint: "zij + zijn = ?",
+        explanation: "'Zij is de docent.' = She is the teacher. Zij (she) → is."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'I live in the centre' in het Nederlands?",
+        options: ["Ik woon dichtbij het centrum.", "Ik kom uit het centrum.", "Ik woon in het centrum.", "Ik ben in het centrum."],
+        correct: 2,
+        explanation: "'Ik woon in het centrum.' — note 'het centrum' uses 'het' (neuter article)."
+      },
+      {
+        type: "match_pairs",
+        question: "Koppel Nederlands en Engels:",
+        pairs: [
+          { nl: "achternaam", en: "surname" },
+          { nl: "telefoonnummer", en: "phone number" },
+          { nl: "straat", en: "street" },
+          { nl: "mevrouw", en: "madam" },
+        ]
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'He comes from China' in het Nederlands?",
+        options: ["Hij woont in China.", "Hij heet China.", "Hij komt uit China.", "Hij is China."],
+        correct: 2,
+        explanation: "'Hij komt uit China.' — komen UIT = to come FROM."
+      },
+    ]
+  },
+
+  2: { // Uit welk land kom je? — Nationalities, to be, months
+    title: "Les 2 – Uit welk land kom je?",
+    grammarTip: {
+      title: "🔑 Nationaliteiten & de/het",
+      table: [
+        ["Nederland", "Nederland·s", "Nederlander (m) / Nederlandse (v)"],
+        ["Brazilië", "Braziliaans", "Braziliaan / Braziliaanse"],
+        ["China", "Chinees", "Chinees / Chinese"],
+        ["Frankrijk", "Frans", "Fransman / Française"],
+        ["Engeland", "Engels", "Engelsman / Engelse"],
+      ],
+      headers: ["Land", "Taal/adjectief", "Nationaliteit"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Ik ben geboren ___ 26 december.",
+        options: ["in", "op", "aan", "bij"],
+        correct: 1,
+        explanation: "'Geboren OP' + date. Tip: OP dag/datum; IN maand/jaar."
+      },
+      {
+        type: "multiple_choice",
+        question: "Welke maand komt NA september?",
+        options: ["augustus", "november", "oktober", "december"],
+        correct: 2,
+        explanation: "De volgorde: ...augustus, september, oktober, november, december."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Ik ben ", " jaar oud."],
+        blank: "veertig",
+        hint: "40 in het Nederlands",
+        explanation: "veertig = 40. Let op de spelling: veer-tig (niet viertig)."
+      },
+      {
+        type: "word_order",
+        question: "Zet de woorden in de goede volgorde:",
+        words: ["geboren", "ben", "1983.", "in", "Ik"],
+        correct: "Ik ben geboren in 1983.",
+        explanation: "Past participle 'geboren' goes to the end in Dutch."
+      },
+      {
+        type: "multiple_choice",
+        question: "Paula is getrouwd. Haar man heet Daan. ___ heeft twee kinderen.",
+        options: ["Hij", "Zij", "Wij", "Jullie"],
+        correct: 1,
+        explanation: "Paula = zij (she). 'Zij heeft twee kinderen.' — Paula is the subject."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe oud ben JIJ? → Ik ___ 42 jaar oud.",
+        options: ["heb", "ben", "word", "heet"],
+        correct: 1,
+        explanation: "'Ik BEN ... jaar oud.' = I am ... years old. In Dutch, 'zijn' (to be) is used for age."
+      },
+      {
+        type: "match_pairs",
+        question: "Koppel de maanden met de nummers:",
+        pairs: [
+          { nl: "januari", en: "1" },
+          { nl: "april", en: "4" },
+          { nl: "augustus", en: "8" },
+          { nl: "december", en: "12" },
+        ]
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Wij ", " in Amstelveen."],
+        blank: "wonen",
+        hint: "werkwoord wonen (wij-vorm)",
+        explanation: "'Wij wonen' — plural forms of -en verbs keep the infinitive stem + en."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat is het verschil? 'jij BEN' of 'jij BENT'?",
+        options: ["Allebei goed", "'jij bent' is correct", "'jij ben' is correct", "Beide zijn fout"],
+        correct: 1,
+        explanation: "'Jij bent' is correct! BUT: after 'ben jij?' (question/inversion), it becomes 'ben JIJ?' — the -t drops when 'jij' follows the verb."
+      },
+      {
+        type: "multiple_choice",
+        question: "Ze hebben een jongen van drie jaar en een ___ van vijf maanden.",
+        options: ["man", "zoon", "meisje", "vrouw"],
+        correct: 2,
+        explanation: "meisje = girl. Note: 'het meisje' uses the neuter article 'het'."
+      },
+    ]
+  },
+
+  3: { // Wel of niet — negation, hebben, articles de/het
+    title: "Les 3 – Wel of niet?",
+    grammarTip: {
+      title: "🔑 De & het — lidwoorden",
+      table: [
+        ["de (common)", "de man, de vrouw, de straat, de les"],
+        ["het (neuter)", "het huis, het centrum, het meisje, het land"],
+        ["Tip", "~75% of nouns are 'de'. 'het' for diminutives (-je) and neuters."],
+      ],
+      headers: ["Artikel", "Voorbeelden"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Hoe maak je 'Ik heb een auto' NEGATIEF?",
+        options: ["Ik heb niet een auto.", "Ik heb geen auto.", "Ik ben geen auto.", "Ik heb niet auto."],
+        correct: 1,
+        explanation: "'geen' negates nouns with articles. 'Ik heb GEEN auto.' = I don't have a car. Use 'niet' for verbs/adjectives."
+      },
+      {
+        type: "multiple_choice",
+        question: "Welk lidwoord? ___ huis.",
+        options: ["De", "Het", "Een", "Geen"],
+        correct: 1,
+        explanation: "'Het huis' — 'huis' is a neuter noun. Memorize: het huis, het land, het centrum, het meisje."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Ik heb ", " kinderen."],
+        blank: "geen",
+        hint: "negation of 'kinderen' (noun)",
+        explanation: "'Ik heb GEEN kinderen.' — geen = no / not any (before nouns)."
+      },
+      {
+        type: "word_order",
+        question: "Zet in de goede volgorde:",
+        words: ["ook", "in", "Nederland.", "Bruna", "woont"],
+        correct: "Bruna woont ook in Nederland.",
+        explanation: "'ook' (also) comes after the verb in Dutch."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hij heeft een broer. ___ broer woont in Rotterdam.",
+        options: ["De", "Het", "Zijn", "Haar"],
+        correct: 2,
+        explanation: "'Zijn broer' = his brother. Zijn (his) / haar (her) are possessive pronouns."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat is het goede antwoord? 'Heb je een auto?' → '___, ik heb geen auto.'",
+        options: ["Ja", "Nee", "Wel", "Niet"],
+        correct: 1,
+        explanation: "'Nee, ik heb GEEN auto.' — no = nee. Don't confuse: nee (no) vs. niet/geen (not/none)."
+      },
+      {
+        type: "match_pairs",
+        question: "De of het?",
+        pairs: [
+          { nl: "de man", en: "het huis" },
+          { nl: "de vrouw", en: "het meisje" },
+          { nl: "de straat", en: "het land" },
+          { nl: "de les", en: "het centrum" },
+        ]
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Zij ", " twee kinderen."],
+        blank: "heeft",
+        hint: "werkwoord hebben (zij-vorm)",
+        explanation: "'Zij heeft' — hij/zij/het + heeft (he/she/it has)."
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik heb een zusje. ___ heet Joice.",
+        options: ["Hij", "Zij", "Het", "Jullie"],
+        correct: 1,
+        explanation: "'Zij heet Joice.' — zusje (little sister) is referred to as 'zij' (she)."
+      },
+      {
+        type: "multiple_choice",
+        question: "Welke zin is correct?",
+        options: [
+          "Ik heb niet een broer.",
+          "Ik heb een broer niet.",
+          "Ik heb geen broer.",
+          "Ik geen broer heb."
+        ],
+        correct: 2,
+        explanation: "'Ik heb GEEN broer.' — Geen is used before a noun to negate it. Word order: Subject + Verb + geen + Noun."
+      },
+    ]
+  },
+
+  4: { // Familie — possessives, family vocabulary
+    title: "Les 4 – De familie",
+    grammarTip: {
+      title: "🔑 Bezittelijke voornaamwoorden",
+      table: [
+        ["ik → mijn", "Mijn vader woont in Brasília."],
+        ["jij → jouw/je", "Jouw broer is aardig."],
+        ["hij → zijn", "Zijn moeder heet Paula."],
+        ["zij → haar", "Haar man is Daan."],
+        ["wij → ons/onze", "Ons huis / Onze kinderen."],
+      ],
+      headers: ["Pronomen", "Voorbeeld"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Leo heeft een partner. ___ naam is Bruna.",
+        options: ["Zijn", "Haar", "Mijn", "Hun"],
+        correct: 1,
+        explanation: "Bruna is a woman, and the possessive refers to Leo (he/hij) → 'Zijn naam is Bruna' would mean Leo's name is Bruna. Here we refer to the partner's name, and the partner is female: Haar naam."
+      },
+      {
+        type: "match_pairs",
+        question: "Koppel de familiewoorden:",
+        pairs: [
+          { nl: "vader", en: "father" },
+          { nl: "moeder", en: "mother" },
+          { nl: "broer", en: "brother" },
+          { nl: "dochter", en: "daughter" },
+        ]
+      },
+      {
+        type: "fill_blank",
+        sentence: ["", " kinderen heten Benjamim en David."],
+        blank: "Mijn",
+        hint: "ik → bezittelijk voornaamwoord",
+        explanation: "'Mijn kinderen' = my children. ik → mijn."
+      },
+      {
+        type: "word_order",
+        question: "Maak een zin:",
+        words: ["zus.", "heeft", "een", "Leo", "ook"],
+        correct: "Leo heeft ook een zus.",
+        explanation: "ook (also) follows the verb directly in Dutch declarative sentences."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wij ___ drie kinderen.",
+        options: ["hebben", "heeft", "ben", "zijn"],
+        correct: 0,
+        explanation: "'Wij hebben' = We have. Wij/we always takes 'hebben' (never heeft)."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'grandparents' in het Nederlands?",
+        options: ["ouders", "grootouders", "kinderen", "neven"],
+        correct: 1,
+        explanation: "grootouders = grandparents. groot (big) + ouders (parents). opa = grandfather, oma = grandmother."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Benjamim is ", " oudste kind."],
+        blank: "ons",
+        hint: "wij → bezittelijk voornaamwoord + het-woord",
+        explanation: "'Ons' is used before het-words. 'het kind' → ons kind. For de-words: 'onze' → onze kinderen."
+      },
+      {
+        type: "multiple_choice",
+        question: "David is de ___ van Benjamim.",
+        options: ["broer", "vader", "oom", "neef"],
+        correct: 0,
+        explanation: "broer = brother. David is Benjamim's brother (broer)."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'her children' in het Nederlands?",
+        options: ["zijn kinderen", "mijn kinderen", "haar kinderen", "jouw kinderen"],
+        correct: 2,
+        explanation: "haar kinderen = her children. haar = possessive 'her' (not to confuse with 'haar' = hair)."
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte zin:",
+        words: ["Bruna", "partner.", "is", "Leo's"],
+        correct: "Bruna is Leo's partner.",
+        explanation: "Possessive 's in Dutch works the same as in English: Leo's partner."
+      },
+    ]
+  },
+
+  5: { // Mijn dag — daily routine, time expressions, separable verbs
+    title: "Les 5 – Mijn dag",
+    grammarTip: {
+      title: "🔑 Tijdsaanduidingen & dagelijkse routine",
+      table: [
+        ["'s ochtends", "in the morning"],
+        ["'s middags", "in the afternoon"],
+        ["'s avonds", "in the evening"],
+        ["'s nachts", "at night"],
+        ["om + tijd", "om 7 uur (at 7 o'clock)"],
+        ["hoe laat?", "what time?"],
+      ],
+      headers: ["Nederlands", "Engels"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Hoe laat ben je wakker? → Ik ben ___ 6 uur wakker.",
+        options: ["in", "op", "om", "aan"],
+        correct: 2,
+        explanation: "'Om' is used with clock times in Dutch. 'Om 6 uur' = at 6 o'clock."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Ik ", " 's ochtends om 6 uur."],
+        blank: "sta op",
+        hint: "opstaan = to get up (scheidbaar werkwoord)",
+        explanation: "'Ik sta op' — opstaan is a separable verb: op + staan split in sentences. ik sta OP."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat drink je 's ochtends? → Ik drink ___ thee.",
+        options: ["altijd", "soms", "nooit", "All are correct"],
+        correct: 3,
+        explanation: "altijd (always), soms (sometimes), nooit (never) — all are frequency adverbs that work here."
+      },
+      {
+        type: "match_pairs",
+        question: "Koppel de tijden:",
+        pairs: [
+          { nl: "kwart voor drie", en: "2:45" },
+          { nl: "half vijf", en: "4:30" },
+          { nl: "kwart over zes", en: "6:15" },
+          { nl: "tien over acht", en: "8:10" },
+        ]
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte zin:",
+        words: ["Ik", "ga", "om", "7", "uur", "naar", "werk"],
+        correct: "Ik ga om 7 uur naar werk",
+        explanation: "Time expressions (om 7 uur) often come before place (naar werk). Verb stays in second position."
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik ___ elke dag. (= I work every day)",
+        options: ["ga", "werk", "oefen", "sta"],
+        correct: 1,
+        explanation: "'Ik werk elke dag.' — werken = to work. elke dag = every day."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["", " ga je naar bed?"],
+        blank: "Hoe laat",
+        hint: "what time (question)",
+        explanation: "'Hoe laat ga je naar bed?' = What time do you go to bed? — hoe laat = at what time."
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik ga ___ de bus naar kantoor.",
+        options: ["met", "in", "op", "aan"],
+        correct: 0,
+        explanation: "'Met de bus' = by bus. Met de trein, met de fiets, met de auto — always 'met' for transportation."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'I train three times a week' in het Nederlands?",
+        options: [
+          "Ik train drie keer per week.",
+          "Ik train drie weken.",
+          "Ik train driemaal dag.",
+          "Ik train om drie uur."
+        ],
+        correct: 0,
+        explanation: "'Drie keer per week' = three times a week. keer = time/occurrence. per = per."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat betekent 'Ik moet vroeg opstaan'?",
+        options: [
+          "I want to wake up early",
+          "I have to get up early",
+          "I always wake up late",
+          "I get up at 6"
+        ],
+        correct: 1,
+        explanation: "'Moeten' = must/have to. 'Ik moet vroeg opstaan' = I have to get up early."
+      },
+    ]
+  },
+
+  6: { // Boodschappen — shopping, quantities, er is/zijn
+    title: "Les 6 – Boodschappen",
+    grammarTip: {
+      title: "🔑 Er is / Er zijn + hoeveelheden",
+      table: [
+        ["Er is + het/de-woord", "Er is een supermarkt."],
+        ["Er zijn + meervoud", "Er zijn veel winkels."],
+        ["Er is geen", "Er is geen melk."],
+        ["een beetje", "a little (uncountable)"],
+        ["een paar", "a few (countable)"],
+        ["veel / weinig", "a lot / little"],
+      ],
+      headers: ["Structuur", "Voorbeeld"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "In de supermarkt: 'Hoeveel kost dit?' → '___, het kost twee euro vijftig.'",
+        options: ["Goed", "Dank je", "Dat", "Ja, dat klopt"],
+        correct: 3,
+        explanation: "Ja, dat klopt = Yes, that's correct. Common response when confirming a price."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["", " is geen melk meer."],
+        blank: "Er",
+        hint: "existential 'there is'",
+        explanation: "'Er is geen melk meer.' = There is no more milk. 'Er is/zijn' = there is/are."
+      },
+      {
+        type: "match_pairs",
+        question: "Koppel de hoeveelheden:",
+        pairs: [
+          { nl: "een liter", en: "1 litre" },
+          { nl: "een kilo", en: "1 kilogram" },
+          { nl: "een flesje", en: "a small bottle" },
+          { nl: "een blikje", en: "a can/tin" },
+        ]
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik wil ___ appels. (= a few apples)",
+        options: ["een beetje", "een paar", "veel", "geen"],
+        correct: 1,
+        explanation: "'een paar appels' = a few apples. 'een beetje' is for uncountable: een beetje melk."
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte zin:",
+        words: ["Er", "zijn", "veel", "winkels", "in", "de", "supermarkt"],
+        correct: "Er zijn veel winkels in de supermarkt",
+        explanation: "'Er zijn' starts the existential sentence, with the noun after the verb."
+      },
+      {
+        type: "multiple_choice",
+        question: "Mag ik een ___ brood? (= a loaf of bread)",
+        options: ["stuk", "kilo", "fles", "kop"],
+        correct: 0,
+        explanation: "'Een stuk brood' = a piece/loaf of bread. een kopje koffie = a cup of coffee; een glas water = a glass of water."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Hoeveel ", " dit?"],
+        blank: "kost",
+        hint: "to cost, singular",
+        explanation: "'Hoeveel kost dit?' = How much does this cost? kosten (plural): 'Hoeveel kosten deze appels?'"
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'I need bread and milk' in het Nederlands?",
+        options: [
+          "Ik wil brood en melk.",
+          "Ik heb brood en melk nodig.",
+          "Ik koop brood en melk.",
+          "Ik eet brood en melk."
+        ],
+        correct: 1,
+        explanation: "'Ik heb ... nodig' = I need ... The structure is: hebben + object + nodig."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe betaal je? → Ik betaal ___ pin.",
+        options: ["met", "per", "aan", "voor"],
+        correct: 0,
+        explanation: "'Met pin' = by debit card. Met contant geld = with cash. Always 'met' for payment method."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat betekent 'te duur'?",
+        options: ["too cheap", "too expensive", "on sale", "free"],
+        correct: 1,
+        explanation: "'Te duur' = too expensive. te = too (when before adjective). goedkoop = cheap; gratis = free."
+      },
+    ]
+  },
+
+  7: { // Stap voor stap — modal verbs, infinitives
+    title: "Les 7 – Stap voor stap leren",
+    grammarTip: {
+      title: "🔑 Modale werkwoorden",
+      table: [
+        ["moeten (must)", "Ik moet studeren."],
+        ["willen (want)", "Ik wil leren."],
+        ["kunnen (can)", "Ik kan Nederlands spreken."],
+        ["mogen (may)", "Mag ik een vraag stellen?"],
+        ["hoeven (need to)", "Je hoeft niet te betalen."],
+      ],
+      headers: ["Werkwoord", "Voorbeeld"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Je ___ de tekst begrijpen zonder hulp.",
+        options: ["moet", "wil", "kunt", "mag"],
+        correct: 0,
+        explanation: "Moeten = must/have to. 'Je moet de tekst begrijpen.' = You have to understand the text."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Ik ", " geen Nederlands spreken in mijn buurt."],
+        blank: "hoef",
+        hint: "hoeven (not need to) — in negative sentences",
+        explanation: "'Hoeven' is used in negative contexts: 'Ik hoef geen... te spreken.' = I don't need to speak Dutch."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat is het verschil? 'Ik kan' vs 'Ik wil'?",
+        options: [
+          "Geen verschil",
+          "'Kan' = ability; 'wil' = desire",
+          "'Kan' = desire; 'wil' = obligation",
+          "'Kan' = permission; 'wil' = ability"
+        ],
+        correct: 1,
+        explanation: "'Ik kan' = I am able to / I can (ability). 'Ik wil' = I want to (desire/wish)."
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte zin:",
+        words: ["wil", "ik", "leren.", "Nederlands", "goed"],
+        correct: "ik wil goed Nederlands leren.",
+        explanation: "With modal verbs: Subject + modal + [rest] + infinitive at the end."
+      },
+      {
+        type: "multiple_choice",
+        question: "Mag ik ___ stellen? (= ask a question)",
+        options: ["een vraag", "een antwoord", "een woord", "een les"],
+        correct: 0,
+        explanation: "'Een vraag stellen' = to ask a question. antwoord geven = to give an answer."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Je ", " niet elke dag te oefenen."],
+        blank: "hoeft",
+        hint: "hoeven + niet + te + infinitief",
+        explanation: "'Hoeven ... niet te' = don't need to. This is different from 'moeten niet' (must not)!"
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik ___ de tekst pas later herhalen. (= I can repeat the text later)",
+        options: ["moet", "kan", "mag", "wil"],
+        correct: 1,
+        explanation: "'Ik kan' = I can / I am able to. Used for possibility and ability."
+      },
+      {
+        type: "match_pairs",
+        question: "Koppel werkwoord en betekenis:",
+        pairs: [
+          { nl: "moeten", en: "must / have to" },
+          { nl: "willen", en: "want to" },
+          { nl: "kunnen", en: "can / be able to" },
+          { nl: "mogen", en: "may / be allowed to" },
+        ]
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik ___ dat niet. (= I don't understand that)",
+        options: ["begrijp", "lees", "weet", "hoor"],
+        correct: 0,
+        explanation: "'Ik begrijp dat niet.' = I don't understand that. begrijpen = to understand."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat betekent 'Je moet het later herhalen'?",
+        options: [
+          "You can listen again later",
+          "You must repeat it later",
+          "You want to review it",
+          "You may skip it"
+        ],
+        correct: 1,
+        explanation: "'Herhalen' = to repeat/review. 'Moeten' = must. So: 'You must repeat it later.'"
+      },
+    ]
+  },
+
+  8: { // Eten & drinken — food vocabulary, preferences
+    title: "Les 8 – Eten en drinken",
+    grammarTip: {
+      title: "🔑 Eten uitdrukken: lust / lekker / graag",
+      table: [
+        ["lust (lusten)", "Ik lust geen groente. (I don't like eating)"],
+        ["lekker vinden", "Ik vind koffie lekker. (I think it tastes good)"],
+        ["graag + verb", "Ik eet graag pasta. (I like eating)"],
+        ["liever", "Ik eet liever rijst. (I prefer eating)"],
+        ["het liefst", "Ik eet het liefst brood. (I like eating the most)"],
+      ],
+      headers: ["Uitdrukking", "Voorbeeld & betekenis"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Ik ___ geen varkensvlees. (preference/taste)",
+        options: ["lust", "eet", "drink", "koop"],
+        correct: 0,
+        explanation: "'Lusten' expresses whether you like the taste of something. 'Ik lust geen varkensvlees.' = I don't like eating pork."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Ik eet ", " pasta."],
+        blank: "graag",
+        hint: "expressing preference with a verb",
+        explanation: "'Ik eet graag pasta.' = I like eating pasta. 'graag' after the verb."
+      },
+      {
+        type: "match_pairs",
+        question: "Koppel het voedsel met de categorie:",
+        pairs: [
+          { nl: "appel", en: "fruit" },
+          { nl: "broccoli", en: "groente" },
+          { nl: "kip", en: "vlees" },
+          { nl: "kaas", en: "zuivel" },
+        ]
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'I prefer drinking tea' in het Nederlands?",
+        options: [
+          "Ik drink graag thee.",
+          "Ik drink liever thee.",
+          "Ik lust thee.",
+          "Ik wil thee drinken."
+        ],
+        correct: 1,
+        explanation: "'Liever' = prefer (comparative of graag). 'Ik drink liever thee (dan koffie).' = I prefer drinking tea (than coffee)."
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte zin:",
+        words: ["koffie", "vind", "lekker.", "Ik", "niet"],
+        correct: "Ik vind koffie niet lekker.",
+        explanation: "'Niet' comes before the adjective 'lekker'. 'Ik vind ... niet lekker' = I don't find ... tasty."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat is een ontbijt in Nederland?",
+        options: [
+          "soep en aardappelen",
+          "brood met kaas of jam",
+          "rijst en groente",
+          "pasta met saus"
+        ],
+        correct: 1,
+        explanation: "Dutch breakfast: brood (bread) met kaas (cheese) of jam (jam), often with koffie or thee."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Ik drink het ", " water."],
+        blank: "liefst",
+        hint: "superlative of graag",
+        explanation: "'Het liefst' = most of all/prefer above everything. It's the superlative of graag → liever → het liefst."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat betekent 'Ik heb honger'?",
+        options: ["I am thirsty", "I am hungry", "I am tired", "I am full"],
+        correct: 1,
+        explanation: "'Honger hebben' = to be hungry. Dorst hebben = to be thirsty. Vol zijn = to be full."
+      },
+      {
+        type: "multiple_choice",
+        question: "Mag ik ___ brood? (= some more bread)",
+        options: ["meer", "minder", "veel", "genoeg"],
+        correct: 0,
+        explanation: "'Nog meer' = some more / more. 'Mag ik nog wat brood?' is also common."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'I cook every day' in het Nederlands?",
+        options: [
+          "Ik kook elke dag.",
+          "Ik maak elke dag.",
+          "Ik eet elke dag.",
+          "Ik bak elke dag."
+        ],
+        correct: 0,
+        explanation: "'Koken' = to cook. 'Ik kook elke dag.' = I cook every day. bakken = to bake/fry."
+      },
+    ]
+  },
+
+  9: { // Hoe laat? — clock, appointments, agenda
+    title: "Les 9 – Hoe laat is het?",
+    grammarTip: {
+      title: "🔑 Tijden & afspraken",
+      table: [
+        ["half + uur", "half drie = 2:30 (half TO three!)"],
+        ["kwart over", "kwart over twee = 2:15"],
+        ["kwart voor", "kwart voor drie = 2:45"],
+        ["precies / ongeveer", "exactly / approximately"],
+        ["een afspraak", "an appointment"],
+        ["op tijd", "on time"],
+      ],
+      headers: ["Uitdrukking", "Betekenis"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Hoe laat is het? 14:30",
+        options: ["half twee", "half drie", "kwart over twee", "kwart voor drie"],
+        correct: 1,
+        explanation: "TRAP: 'half drie' = 2:30 (half way TO three). This is different from English! half drie ≠ half past three."
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik heb een afspraak ___ drie uur.",
+        options: ["in", "om", "op", "aan"],
+        correct: 1,
+        explanation: "'Om drie uur' = at three o'clock. Always 'om' with clock times."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["De vergadering is ", " maandag."],
+        blank: "op",
+        hint: "on + day of the week",
+        explanation: "'Op maandag' = on Monday. Always 'op' before days of the week."
+      },
+      {
+        type: "match_pairs",
+        question: "Koppel de tijden:",
+        pairs: [
+          { nl: "kwart over vijf", en: "5:15" },
+          { nl: "half zeven", en: "6:30" },
+          { nl: "kwart voor negen", en: "8:45" },
+          { nl: "tien voor twaalf", en: "11:50" },
+        ]
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat betekent 'te laat'?",
+        options: ["on time", "too early", "late / too late", "just in time"],
+        correct: 2,
+        explanation: "'Te laat' = too late / late. te (too) + laat (late). Op tijd = on time. vroeg = early."
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte zin:",
+        words: ["Op", "maandag", "om", "vier", "uur", "hebben", "we", "een", "afspraak"],
+        correct: "Op maandag om vier uur hebben we een afspraak",
+        explanation: "When starting with time/day, the verb comes before the subject: Op maandag om vier uur HEBBEN WE..."
+      },
+      {
+        type: "multiple_choice",
+        question: "Het ___ nu precies kwart voor acht.",
+        options: ["is", "zijn", "gaat", "heeft"],
+        correct: 0,
+        explanation: "'Het is kwart voor acht.' = It is quarter to eight. Always 'het is' for time."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Hoe laat ", " de les?"],
+        blank: "begint",
+        hint: "beginnen (de les-vorm = 3e persoon)",
+        explanation: "'Hoe laat begint de les?' = What time does the class start? beginnen → begint (3rd person)."
+      },
+      {
+        type: "multiple_choice",
+        question: "Van ___ tot ___. (from... to... = opening hours)",
+        options: ["in ... bij", "van ... tot", "om ... naar", "bij ... voor"],
+        correct: 1,
+        explanation: "'Van ... tot ...' = from ... to ... Used for time periods: van negen tot vijf."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wanneer vertrekt de trein? → Over ___ minuten.",
+        options: ["van", "in", "om", "over"],
+        correct: 3,
+        explanation: "'Over' + time = in [amount of time] from now. 'Over tien minuten' = in ten minutes."
+      },
+    ]
+  },
+
+  10: { // De week — days, habits, frequency
+    title: "Les 10 – De week",
+    grammarTip: {
+      title: "🔑 Frequentiewoorden & dagen",
+      table: [
+        ["altijd", "always"],
+        ["meestal", "usually"],
+        ["vaak", "often"],
+        ["soms", "sometimes"],
+        ["zelden", "rarely"],
+        ["nooit", "never"],
+      ],
+      headers: ["Nederlands", "Engels"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Welke dag komt NA donderdag?",
+        options: ["woensdag", "vrijdag", "zaterdag", "dinsdag"],
+        correct: 1,
+        explanation: "ma, di, wo, do, VR, za, zo — vrijdag comes after donderdag."
+      },
+      {
+        type: "match_pairs",
+        question: "Koppel de dagen:",
+        pairs: [
+          { nl: "maandag", en: "Monday" },
+          { nl: "woensdag", en: "Wednesday" },
+          { nl: "vrijdag", en: "Friday" },
+          { nl: "zondag", en: "Sunday" },
+        ]
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Ik train drie keer ", " week."],
+        blank: "per",
+        hint: "'per' = per (expressing frequency)",
+        explanation: "'Drie keer per week' = three times per week. per dag, per maand, per jaar."
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik ga ___ naar de sportschool. (= never)",
+        options: ["altijd", "soms", "nooit", "vaak"],
+        correct: 2,
+        explanation: "'Nooit' = never. Word order: verb + nooit in the middle of the sentence."
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte zin:",
+        words: ["Op", "vrijdagavond", "sport", "ik"],
+        correct: "Op vrijdagavond sport ik",
+        explanation: "Inversie! Na een tijdsbepaling vooraan komt het werkwoord vóór het onderwerp: 'Op vrijdagavond SPORT IK.' (niet 'sporten ik')."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat doe je ___ weekend? (= in the weekend)",
+        options: ["in het", "op het", "aan het", "voor het"],
+        correct: 0,
+        explanation: "'In het weekend' = in the weekend. Also: 'in het voorjaar' (in spring), 'in de zomer' (in summer)."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Ik werk ", " maandag tot en met vrijdag."],
+        blank: "van",
+        hint: "from ... to (days)",
+        explanation: "'Van maandag tot en met vrijdag' = from Monday through Friday. tot en met = up to and including."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'every other day' in het Nederlands?",
+        options: ["elke dag", "om de dag", "twee keer per dag", "af en toe"],
+        correct: 1,
+        explanation: "'Om de dag' = every other day. 'Af en toe' = now and then/occasionally."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat is het verschil? 'vorige week' vs 'volgende week'?",
+        options: [
+          "No difference",
+          "vorige = last; volgende = next",
+          "vorige = next; volgende = last",
+          "Both mean 'this week'"
+        ],
+        correct: 1,
+        explanation: "'Vorige week' = last week. 'Volgende week' = next week. 'Deze week' = this week."
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik werk ___ drie keer per week. (= approximately)",
+        options: ["precies", "pas", "ongeveer", "al"],
+        correct: 2,
+        explanation: "'Ongeveer' = approximately/about. 'Precies' = exactly. 'Al' = already."
+      },
+    ]
+  },
+
+  11: { // Hoe gaat het — well-being, adjectives, comparisons
+    title: "Les 11 – Hoe gaat het?",
+    grammarTip: {
+      title: "🔑 Adjectieven: vergrotende & overtreffende trap",
+      table: [
+        ["groot", "groter", "het grootst"],
+        ["klein", "kleiner", "het kleinst"],
+        ["goed", "beter", "het best"],
+        ["veel", "meer", "het meest"],
+        ["weinig", "minder", "het minst"],
+      ],
+      headers: ["Stellend", "Vergrotend", "Overtreffend"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Hoe gaat het? → ___ goed, dank je.",
+        options: ["Veel", "Heel", "Erg", "Zo"],
+        correct: 1,
+        explanation: "'Heel goed' = very good. 'Heel' is the most common intensifier. erg/echt also work."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Amstelveen is ", " dan Amsterdam."],
+        blank: "kleiner",
+        hint: "klein → vergrotende trap",
+        explanation: "'Kleiner' = smaller. klein → kleiner → het kleinst."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'I feel better today' in het Nederlands?",
+        options: [
+          "Ik voel mij meer vandaag.",
+          "Ik voel mij beter vandaag.",
+          "Ik ben het best vandaag.",
+          "Vandaag ik voel goed."
+        ],
+        correct: 1,
+        explanation: "'Ik voel mij beter' = I feel better. goed → beter → het best."
+      },
+      {
+        type: "match_pairs",
+        question: "Hoe voel je je? Koppel:",
+        pairs: [
+          { nl: "moe", en: "tired" },
+          { nl: "ziek", en: "sick" },
+          { nl: "blij", en: "happy" },
+          { nl: "gestrest", en: "stressed" },
+        ]
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte zin:",
+        words: ["is", "het", "weer", "dan", "gisteren.", "vandaag", "Beter"],
+        correct: "Beter is het weer vandaag dan gisteren.",
+        explanation: "Hmm — actually the natural word order is: 'Het weer is vandaag beter dan gisteren.'"
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat is de vergrotende trap van 'mooi'?",
+        options: ["mooier", "mooier", "mooiier", "het mooiste"],
+        correct: 0,
+        explanation: "'Mooier' = more beautiful. Most adjectives: + -er. Double vowel contracts: mooi → mooier."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Dit is de ", " dag van mijn leven!"],
+        blank: "beste",
+        hint: "goed → beter → het ... (superlative + adjective ending -e)",
+        explanation: "'De beste dag' = the best day. Superlative + definite article: het best → de beste (adj. ending -e)."
+      },
+      {
+        type: "multiple_choice",
+        question: "Leo traint ___ dan vorig jaar. (= more often)",
+        options: ["vaakst", "vaker", "meer", "het meest"],
+        correct: 1,
+        explanation: "'Vaker' = more often. vaak → vaker → het vaakst."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat is het tegenovergestelde van 'blij'?",
+        options: ["moe", "druk", "verdrietig", "ziek"],
+        correct: 2,
+        explanation: "'Verdrietig' = sad. The opposite of blij (happy) is verdrietig/ongelukkig."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe gaat het op je werk? → Het gaat ___ .",
+        options: [
+          "Goed, ik heb veel te doen.",
+          "Goed, ik heb veel gedaan.",
+          "Goed, ik ga werken.",
+          "All of the above could be correct"
+        ],
+        correct: 3,
+        explanation: "All answers can work in context! Language is flexible. The key is: Goed + adding more context."
+      },
+    ]
+  },
+
+  12: { // Hoe kom ik daar? — directions, transport
+    title: "Les 12 – Hoe kom ik daar?",
+    grammarTip: {
+      title: "🔑 Richting & vervoer",
+      table: [
+        ["rechtdoor gaan", "go straight ahead"],
+        ["linksaf gaan", "turn left"],
+        ["rechtsaf gaan", "turn right"],
+        ["de eerste straat links", "first street on the left"],
+        ["aan het einde van", "at the end of"],
+        ["bij de hoek", "at the corner"],
+      ],
+      headers: ["Nederlands", "Engels"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Hoe kom ik bij het station? → Ga ___ en dan linksaf.",
+        options: ["rechtdoor", "rechtaf", "rechts", "rechtop"],
+        correct: 0,
+        explanation: "'Rechtdoor' = straight ahead. Linksaf = turn left. Rechtsaf = turn right."
+      },
+      {
+        type: "match_pairs",
+        question: "Koppel vervoermiddelen:",
+        pairs: [
+          { nl: "fiets", en: "bicycle" },
+          { nl: "metro", en: "metro/subway" },
+          { nl: "trein", en: "train" },
+          { nl: "bus", en: "bus" },
+        ]
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Ik ga met ", " fiets naar kantoor."],
+        blank: "de",
+        hint: "definite article for 'fiets' (de-word)",
+        explanation: "'Met de fiets' = by bicycle. Note: met de auto, met de bus, met de trein — always with 'de' article."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoelang ___ je over de reis? (= How long does the journey take you?)",
+        options: ["ga", "doe", "heb", "neem"],
+        correct: 1,
+        explanation: "'Hoelang doe je erover?' = How long does it take you? doen + erover = time spent on something."
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte zin:",
+        words: ["Ga", "rechtdoor", "en", "dan", "naar", "links"],
+        correct: "Ga rechtdoor en dan naar links",
+        explanation: "Gebod (imperatief): 'Ga rechtdoor en dan naar links.' = Go straight ahead and then to the left."
+      },
+      {
+        type: "multiple_choice",
+        question: "De supermarkt is ___ de apotheek. (= next to the pharmacy)",
+        options: ["naast", "achter", "voor", "boven"],
+        correct: 0,
+        explanation: "'Naast' = next to. achter = behind. voor = in front of. boven = above."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Het is maar vijf minuten ", " lopen."],
+        blank: "te",
+        hint: "te + infinitief (= to walk)",
+        explanation: "'Vijf minuten te lopen' = five minutes' walk. te + infinitive expresses purpose/manner."
+      },
+      {
+        type: "multiple_choice",
+        question: "Moet ik ___ overstappen? (= transfer/change trains)",
+        options: ["afstappen", "instappen", "overstappen", "uitstappen"],
+        correct: 2,
+        explanation: "'Overstappen' = to transfer/change (transport). instappen = to board. uitstappen = to get off."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoeven (hoeven/moeten) we lang te wachten? → Nee, je ___ niet lang te wachten.",
+        options: ["moet", "hoeft", "kan", "mag"],
+        correct: 1,
+        explanation: "'Je hoeft niet lang te wachten.' = You don't need to wait long. Hoeven is used in negative contexts."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat betekent 'files'?",
+        options: ["roads", "traffic jams", "bike lanes", "bus stops"],
+        correct: 1,
+        explanation: "'File' (de file) = traffic jam. 'Er staat file op de A10' = There's a traffic jam on the A10."
+      },
+    ]
+  },
+
+  13: { // Een feest — invitations, past tense (perfectum)
+    title: "Les 13 – Een feest",
+    grammarTip: {
+      title: "🔑 Perfectum (voltooid tegenwoordige tijd)",
+      table: [
+        ["hebben + ge-...-(d/t)", "Ik heb gegeten. (I have eaten)"],
+        ["zijn + ge-...-en", "Ik ben gegaan. (I have gone)"],
+        ["Beweging → zijn", "lopen, rijden, vliegen, komen"],
+        ["'t kofschip / 't fokschaap", "determines -d or -t past participle"],
+      ],
+      headers: ["Structuur", "Voorbeeld / Regel"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Ik ___ gisteren een feest georganiseerd. (= I organized a party yesterday)",
+        options: ["ben", "heb", "had", "was"],
+        correct: 1,
+        explanation: "'Ik heb ... georganiseerd.' — transitive verbs use 'hebben' as auxiliary. 'hebben + ge-werkwoord'."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["We ", " naar het feest gegaan."],
+        blank: "zijn",
+        hint: "bewegingswerkwoord → zijn of hebben?",
+        explanation: "'Gaan' is a movement verb → uses 'zijn' as auxiliary. 'We zijn gegaan.' = We went/have gone."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat heb je ___ weekend gedaan?",
+        options: ["afgelopen", "vorige", "gisteren", "volgende"],
+        correct: 0,
+        explanation: "'Afgelopen weekend' = last weekend. Also common: 'het weekend van ...' or 'vorig weekend'."
+      },
+      {
+        type: "match_pairs",
+        question: "Verleden tijd: koppel infinitief met voltooid deelwoord:",
+        pairs: [
+          { nl: "werken", en: "gewerkt" },
+          { nl: "koken", en: "gekookt" },
+          { nl: "lopen", en: "gelopen" },
+          { nl: "slapen", en: "geslapen" },
+        ]
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik heb een cadeau ___. (= given)",
+        options: ["gegeven", "gegaan", "gekregen", "gedaan"],
+        correct: 0,
+        explanation: "'Gegeven' = given. geven → gegeven (irregular). krijgen → gekregen (received). doen → gedaan."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Benjamim heeft goed ", "."],
+        blank: "geslapen",
+        hint: "slapen → perfectum",
+        explanation: "'Geslapen' = slept. slapen → geslapen. Gebruikt hebben (niet zijn) als hulpwerkwoord."
+      },
+      {
+        type: "multiple_choice",
+        question: "Ze ___ om tien uur thuis gekomen. (= arrived home)",
+        options: ["hebben", "zijn", "heb", "is"],
+        correct: 1,
+        explanation: "'Zijn thuisgekomen' — 'thuiskomen' is a movement verb → uses zijn. Ze (plural) → zijn."
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte perfectumzin:",
+        words: ["David", "getekend.", "heeft"],
+        correct: "David heeft getekend.",
+        explanation: "Perfectum: Subject + hebben/zijn + ... + voltooid deelwoord (at the end!)."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat is het voltooid deelwoord van 'kopen'?",
+        options: ["gekoopt", "gekopen", "gekocht", "koopt"],
+        correct: 2,
+        explanation: "'Gekocht' — kopen is irregular. Common irregulars: kopen→gekocht, schrijven→geschreven, rijden→gereden."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'What did you do this weekend?' in het Nederlands?",
+        options: [
+          "Wat doe je dit weekend?",
+          "Wat heb je dit weekend gedaan?",
+          "Wat ga je dit weekend doen?",
+          "Wat ben je dit weekend gegaan?"
+        ],
+        correct: 1,
+        explanation: "'Wat heb je dit weekend gedaan?' = What did you do this weekend? hebben + gedaan (doen → gedaan)."
+      },
+    ]
+  },
+
+  14: { // Vrije tijd — hobbies, leisure
+    title: "Les 14 – Vrije tijd",
+    grammarTip: {
+      title: "🔑 Werkwoorden + aan het (progressief)",
+      table: [
+        ["bezig zijn met", "to be busy with"],
+        ["aan het + infinitief", "Ik ben aan het koken. (I am cooking)"],
+        ["houden van", "to love / like (hobby)"],
+        ["hobby's", "hobbies (note the apostrophe!)"],
+      ],
+      headers: ["Structuur", "Uitleg"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Ik ben ___ het leren. (= I am learning)",
+        options: ["voor", "aan", "bezig", "nu"],
+        correct: 1,
+        explanation: "'Ik ben AAN het leren.' = I am (in the process of) learning. 'aan het + infinitief' is the Dutch progressive."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Leo houdt van ", " kijken."],
+        blank: "films",
+        hint: "houden van + hobby",
+        explanation: "'Houden van' + noun/activity = to love/like. Ik hou van voetbal. Ik hou van lezen."
+      },
+      {
+        type: "match_pairs",
+        question: "Koppel hobby's:",
+        pairs: [
+          { nl: "lezen", en: "reading" },
+          { nl: "sporten", en: "exercising" },
+          { nl: "koken", en: "cooking" },
+          { nl: "reizen", en: "travelling" },
+        ]
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat doe je in je ___ tijd? (= free time)",
+        options: ["vrij", "vrije", "vrijetijds", "vriend"],
+        correct: 1,
+        explanation: "'Vrije tijd' = free time. The adjective 'vrij' gets -e ending before 'de-word' (de tijd)."
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte zin:",
+        words: ["Benjamim", "Lego", "aan", "is", "het", "spelen."],
+        correct: "Benjamim is aan het Lego spelen.",
+        explanation: "'Aan het + infinitief' shows an ongoing action. zijn + aan het + [object] + infinitief."
+      },
+      {
+        type: "multiple_choice",
+        question: "Ze speelt ___ de piano. (= plays the piano)",
+        options: ["op", "met", "aan", "voor"],
+        correct: 0,
+        explanation: "'Spelen OP' + instrument. Ze speelt op de piano / op de gitaar / op de drums."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Ik ga dit weekend naar een ", "."],
+        blank: "concert",
+        hint: "music performance (het-word)",
+        explanation: "'Concert' = concert. het concert. Ik ga naar een concert. Let op: naar een ... (geen 'de' here)."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'I watch a lot of movies' in het Nederlands?",
+        options: [
+          "Ik kijk veel films.",
+          "Ik zie veel films.",
+          "Ik lees veel films.",
+          "Ik luister veel films."
+        ],
+        correct: 0,
+        explanation: "'Films kijken' = to watch movies. kijken naar = to look at. 'Ik kijk veel films' or 'Ik kijk veel naar films.'"
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat is het verschil? 'gaan + infinitief' vs 'zijn aan het + infinitief'?",
+        options: [
+          "No difference",
+          "gaan = future plan; aan het = happening now",
+          "gaan = past; aan het = future",
+          "Both express the past"
+        ],
+        correct: 1,
+        explanation: "'Ik ga sporten' = I'm going to exercise (future plan). 'Ik ben aan het sporten' = I am exercising (right now, ongoing)."
+      },
+      {
+        type: "multiple_choice",
+        question: "Benjamim ___ erg van Lego.",
+        options: ["heeft", "houdt", "houd", "wil"],
+        correct: 1,
+        explanation: "'Benjamim houdt erg van Lego.' — houden (hij/zij/het) → houdt. 'erg' intensifies: very much."
+      },
+    ]
+  },
+
+  15: { // Pakketje — shopping online, services
+    title: "Les 15 – Een pakketje",
+    grammarTip: {
+      title: "🔑 Bijzinnen met 'omdat' & 'want'",
+      table: [
+        ["omdat (subordinate)", "Ik koop het online OMDAT het goedkoper IS."],
+        ["want (coordinating)", "Ik koop het online, WANT het is goedkoper."],
+        ["omdat → verb to end", "YES — verb at end of clause"],
+        ["want → normal order", "NO change in word order"],
+      ],
+      headers: ["Voegwoord", "Voorbeeld & regel"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Ik koop online ___ het goedkoper is.",
+        options: ["want", "omdat", "maar", "of"],
+        correct: 1,
+        explanation: "Both 'omdat' and 'want' mean 'because' BUT: omdat puts verb at end; want keeps normal order. Here verb is at end → 'omdat'."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Ik wacht op mijn ", "."],
+        blank: "pakketje",
+        hint: "a small package (diminutive)",
+        explanation: "'Pakketje' = small package. pakket + -je = diminutive. All diminutives are 'het': het pakketje."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe lang duurt de bezorging? → Het pakketje komt ___ twee tot drie dagen.",
+        options: ["in", "over", "binnen", "na"],
+        correct: 2,
+        explanation: "'Binnen twee tot drie dagen' = within two to three days. binnen = within (time frame)."
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte zin met 'omdat':",
+        words: ["Ik", "omdat", "online,", "goedkoper", "koop", "het", "is."],
+        correct: "Ik koop online, omdat het goedkoper is.",
+        explanation: "Met 'omdat': werkwoord staat aan het einde van de bijzin! ...omdat het goedkoper IS."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat betekent 'retourneren'?",
+        options: ["to order", "to pay", "to return (send back)", "to receive"],
+        correct: 2,
+        explanation: "'Retourneren' = to return / send back. 'Ik wil dit product retourneren.' = I want to return this product."
+      },
+      {
+        type: "match_pairs",
+        question: "Online shoppen — koppel de begrippen:",
+        pairs: [
+          { nl: "bestellen", en: "to order" },
+          { nl: "bezorging", en: "delivery" },
+          { nl: "betalen", en: "to pay" },
+          { nl: "kortingscode", en: "discount code" },
+        ]
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Het pakketje is nog niet ", "."],
+        blank: "aangekomen",
+        hint: "aankomen → perfectum (bewegingswerkwoord)",
+        explanation: "'Aangekomen' = arrived. aankomen → is aangekomen (movement verb → zijn)."
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik heb een klacht. ___ ik de klantenservice bellen?",
+        options: ["Moet", "Kan", "Mag", "Wil"],
+        correct: 1,
+        explanation: "'Kan ik de klantenservice bellen?' = Can I call customer service? Kan = ability/possibility."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'the product is out of stock' in het Nederlands?",
+        options: [
+          "Het product is kapot.",
+          "Het product is niet beschikbaar.",
+          "Het product is duur.",
+          "Het product is nieuw."
+        ],
+        correct: 1,
+        explanation: "'Niet beschikbaar' = not available / out of stock. uitverkocht = sold out (also correct in context)."
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik koop dit product, ___ het is iets duurder dan verwacht.",
+        options: ["omdat", "want", "maar", "dus"],
+        correct: 2,
+        explanation: "'Maar' = but. Use 'maar' for contrast. 'Maar het is iets duurder' = but it is slightly more expensive."
+      },
+    ]
+  },
+
+  16: { // School — education system, must/have to
+    title: "Les 16 – School",
+    grammarTip: {
+      title: "🔑 Bijvoeglijke naamwoorden als predicaat vs. attributief",
+      table: [
+        ["Predicatief (na 'zijn')", "De school is groot. (no -e ending)"],
+        ["Attributief + de-woord", "de grote school (-e ending)"],
+        ["Attributief + het-woord", "het grote gebouw (-e ending)"],
+        ["Attributief + een + het-woord", "een groot gebouw (NO -e!)"],
+      ],
+      headers: ["Positie", "Voorbeeld & regel"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "Het is een ___ school. ('groot' — het-woord zonder lidwoord?)",
+        options: ["groot", "grote", "groter", "grootst"],
+        correct: 0,
+        explanation: "een + het-woord → NO -e: 'een groot gebouw', 'een groot probleem', 'een groot kind'."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["De school is heel ", "."],
+        blank: "groot",
+        hint: "predicatief: na 'zijn' → geen -e",
+        explanation: "Predicative (after 'zijn'): NO -e. 'De school is groot.' NOT 'De school is grote.'"
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat is 'de grote les' vs 'een grote les' vs 'een groot gebouw'?",
+        options: [
+          "All wrong",
+          "de grote les ✓, een grote les ✓, een groot gebouw ✓",
+          "de grote les ✓, een grote les ✗, een groot gebouw ✓",
+          "Alle drie fout"
+        ],
+        correct: 1,
+        explanation: "de/het + adj → always -e. een + de-woord + adj → -e. een + het-woord + adj → NO -e."
+      },
+      {
+        type: "match_pairs",
+        question: "Onderwijs: koppel begrippen:",
+        pairs: [
+          { nl: "basisschool", en: "primary school" },
+          { nl: "middelbare school", en: "secondary school" },
+          { nl: "universiteit", en: "university" },
+          { nl: "huiswerk", en: "homework" },
+        ]
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte zin:",
+        words: ["Benjamim", "goed.", "doet", "het", "Op", "school"],
+        correct: "Op school doet Benjamim het goed.",
+        explanation: "Starting with 'Op school' (place) → inversion: verb before subject."
+      },
+      {
+        type: "multiple_choice",
+        question: "Benjamim gaat naar ___ 3. (Grupo 3 = grade 3)",
+        options: ["groep", "klas", "niveau", "jaar"],
+        correct: 0,
+        explanation: "'Groep 3' is the Dutch primary school term. groep 1-8 = basisschool years. 'Klas' is more secondary/general."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Een ", " kind heeft extra hulp nodig."],
+        blank: "hoogbegaafd",
+        hint: "gifted/high ability",
+        explanation: "'Hoogbegaafd' = gifted. hoog (high) + begaafd (talented). een + het-woord → geen -e."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'He learns quickly' in het Nederlands?",
+        options: [
+          "Hij leert snel.",
+          "Hij leerst snel.",
+          "Hij leert sneller.",
+          "Hij leert het meest."
+        ],
+        correct: 0,
+        explanation: "'Hij leert snel.' = He learns quickly. leren = to learn; snel = quick/fast."
+      },
+      {
+        type: "multiple_choice",
+        question: "De leraar ___ de les. (= explains)",
+        options: ["geeft", "legt uit", "vertelt", "doet"],
+        correct: 1,
+        explanation: "'Uitleggen' = to explain. legt uit (separable verb). De leraar legt de les uit. Also common: 'de les geven'."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'report card' in het Nederlands?",
+        options: ["rapport", "diploma", "certificaat", "toets"],
+        correct: 0,
+        explanation: "'Rapport' = report card. toets = test/quiz. cijfer = grade/mark. diploma = diploma."
+      },
+    ]
+  },
+
+  17: { // Wie ben ik — character, personality, relative clauses
+    title: "Les 17 – Wie ben ik?",
+    grammarTip: {
+      title: "🔑 Betrekkelijke bijzinnen (die/dat)",
+      table: [
+        ["de-woord → die", "De man die hier woont. (The man who lives here)"],
+        ["het-woord → dat", "Het huis dat groot is. (The house that is big)"],
+        ["verb at end", "always in relative clause"],
+        ["wat", "used after 'alles', 'iets', 'niets'"],
+      ],
+      headers: ["Regel", "Voorbeeld"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "De man ___ hier woont, is mijn buurman.",
+        options: ["dat", "die", "wat", "wie"],
+        correct: 1,
+        explanation: "'Die' — used for de-words (de man). 'Dat' for het-words (het huis dat groot is)."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Het werk ", " ik doe, is interessant."],
+        blank: "dat",
+        hint: "het-woord → die of dat?",
+        explanation: "'Dat' — het werk is a het-word. 'Het werk dat ik doe...' = The work that I do..."
+      },
+      {
+        type: "match_pairs",
+        question: "Karaktereigenschappen — koppel:",
+        pairs: [
+          { nl: "introvert", en: "introverted" },
+          { nl: "creatief", en: "creative" },
+          { nl: "gedisciplineerd", en: "disciplined" },
+          { nl: "nieuwsgierig", en: "curious" },
+        ]
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat betekent 'extravert'?",
+        options: [
+          "shy and quiet",
+          "outgoing and energized by social situations",
+          "creative and artistic",
+          "hardworking and focused"
+        ],
+        correct: 1,
+        explanation: "'Extravert' = extroverted (outgoing). tegenovergestelde = introvert. Leo is ESTP → extravert!"
+      },
+      {
+        type: "word_order",
+        question: "Maak een betrekkelijke bijzin:",
+        words: ["De", "tas", "die", "ik", "wil", "kopen", "is", "duur"],
+        correct: "De tas die ik wil kopen is duur",
+        explanation: "Betrekkelijke bijzin: 'De tas DIE ik wil kopen, is duur.' De bijzin 'die ik wil kopen' beschrijft de tas; daarna gaat de hoofdzin verder met 'is duur'."
+      },
+      {
+        type: "multiple_choice",
+        question: "Leo is iemand ___ graag nieuwe dingen leert.",
+        options: ["dat", "die", "wat", "het"],
+        correct: 1,
+        explanation: "'Die' after 'iemand' (a person). iemand die = someone who."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Alles ", " hij zegt, is interessant."],
+        blank: "wat",
+        hint: "betrekkelijk voornaamwoord na 'alles'",
+        explanation: "'Wat' after 'alles', 'niets', 'iets', 'het enige'. Alles WAT hij zegt = everything (that) he says."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe beschrijf je jezelf? → Ik ben ___ en direct.",
+        options: ["aardig", "eerlijk", "introvert", "All can work"],
+        correct: 3,
+        explanation: "All these adjectives describe character! aardig = kind, eerlijk = honest, introvert = introverted."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat is een 'sterke eigenschap'?",
+        options: ["a weakness", "a strong characteristic/strength", "a preference", "an opinion"],
+        correct: 1,
+        explanation: "'Sterke eigenschap' = strong quality/strength. zwakke eigenschap = weakness. Used in job interviews too!"
+      },
+      {
+        type: "multiple_choice",
+        question: "Ik ben iemand ___ altijd op tijd is.",
+        options: ["dat", "die", "wat", "welke"],
+        correct: 1,
+        explanation: "'Ik ben iemand die...' = I am someone who... iemand = person → die."
+      },
+    ]
+  },
+
+  18: { // De buurt — neighbourhood, location descriptions
+    title: "Les 18 – De buurt",
+    grammarTip: {
+      title: "🔑 Locatie & preposities",
+      table: [
+        ["naast", "next to"],
+        ["tegenover", "opposite / across from"],
+        ["tussen ... en ...", "between ... and ..."],
+        ["op de hoek van", "on the corner of"],
+        ["aan de overkant", "on the other side"],
+        ["in de buurt van", "near / in the neighbourhood of"],
+      ],
+      headers: ["Prepositie", "Betekenis"]
+    },
+    exercises: [
+      {
+        type: "multiple_choice",
+        question: "De bakker is ___ de supermarkt. (= opposite the supermarket)",
+        options: ["naast", "tegenover", "achter", "tussen"],
+        correct: 1,
+        explanation: "'Tegenover' = opposite / across from. naast = next to. achter = behind. voor = in front of."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Het postkantoor is ", " de bank en de apotheek."],
+        blank: "tussen",
+        hint: "between two things",
+        explanation: "'Tussen ... en ...' = between ... and ..."
+      },
+      {
+        type: "match_pairs",
+        question: "Koppel de buurtlocaties:",
+        pairs: [
+          { nl: "supermarkt", en: "supermarket" },
+          { nl: "apotheek", en: "pharmacy" },
+          { nl: "gemeente", en: "municipality/city hall" },
+          { nl: "bibliotheek", en: "library" },
+        ]
+      },
+      {
+        type: "word_order",
+        question: "Maak een correcte beschrijving:",
+        words: ["Leo", "woont", "in", "een", "rustige", "buurt", "in", "Amstelveen"],
+        correct: "Leo woont in een rustige buurt in Amstelveen",
+        explanation: "Place descriptions: 'wonen in een [adj] buurt in [city]'. Adjective gets -e before de-word (buurt)."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'It is within walking distance' in het Nederlands?",
+        options: [
+          "Het is ver lopen.",
+          "Het is te ver.",
+          "Het is op loopafstand.",
+          "Het is dichtbij de fiets."
+        ],
+        correct: 2,
+        explanation: "'Op loopafstand' = within walking distance. op fietsafstand = within cycling distance."
+      },
+      {
+        type: "fill_blank",
+        sentence: ["Er is een goed restaurant ", " de buurt."],
+        blank: "in",
+        hint: "in the neighbourhood",
+        explanation: "'In de buurt' = in the neighbourhood / nearby. in de buurt van = near."
+      },
+      {
+        type: "multiple_choice",
+        question: "Amstelveen ___ bekend om zijn internationale gemeenschap.",
+        options: ["is", "heeft", "zijn", "wordt"],
+        correct: 0,
+        explanation: "'Amstelveen is bekend om...' = Amstelveen is known for... bekend om = known for."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'a quiet neighbourhood' in het Nederlands?",
+        options: [
+          "een stille buurt",
+          "een rustige buurt",
+          "een kleine buurt",
+          "A and B are both correct"
+        ],
+        correct: 3,
+        explanation: "Both 'stil' (silent/quiet) and 'rustig' (calm/quiet) work! rustig = calm; stil = silent. Both describe a quiet neighbourhood."
+      },
+      {
+        type: "multiple_choice",
+        question: "Wat zijn de 'voorzieningen' in een buurt?",
+        options: [
+          "the neighbours",
+          "the buildings",
+          "the facilities/amenities",
+          "the streets"
+        ],
+        correct: 2,
+        explanation: "'Voorzieningen' = facilities / amenities (shops, schools, transport, parks, etc.)."
+      },
+      {
+        type: "multiple_choice",
+        question: "Hoe zeg je 'I have been living here for 3 years' in het Nederlands?",
+        options: [
+          "Ik woon hier voor 3 jaar.",
+          "Ik woon hier al 3 jaar.",
+          "Ik woon hier 3 jaar geleden.",
+          "Ik heb hier 3 jaar gewoond."
+        ],
+        correct: 1,
+        explanation: "'Ik woon hier al 3 jaar.' — 'al' is used with present tense for ongoing actions. No 'voor' in Dutch for duration!"
+      },
+    ]
+  }
+,
+
+  19: {
+    title: "Les 19 – De bank",
+    grammarTip: {
+      title: "🔑 Woordenschat bank & 'zou' (conditional)",
+      table: [
+        ["een rekening", "a bank account"],
+        ["overmaken", "to transfer (money)"],
+        ["pinnen", "to pay by debit card"],
+        ["het bedrag", "the amount"],
+        ["zou + infinitief", "would ... (Ik zou graag ...)"]
+      ],
+      headers: ["Nederlands", "Engels"]
+    },
+    exercises: [
+      { type:"multiple_choice", question:"Ik wil geld naar een vriend ___. (= transfer)", options:["pinnen","overmaken","bewaren","opladen"], correct:1, explanation:"'Overmaken' = to transfer (money). 'Ik maak geld over.' (scheidbaar werkwoord)." },
+      { type:"match_pairs", question:"Koppel de bankwoorden:", pairs:[{nl:"rekening",en:"account"},{nl:"bedrag",en:"amount"},{nl:"geldautomaat",en:"cash machine"},{nl:"creditcard",en:"credit card"}] },
+      { type:"fill_blank", sentence:["Ik betaal in de winkel met mijn ",", dus ik pin."], blank:"pasje", hint:"a (debit) card — het-woord", explanation:"'Pasje' = (debit) card. pinnen = to pay by debit card." },
+      { type:"multiple_choice", question:"Wat betekent 'rood staan'?", options:["to save money","to be in the red / overdrawn","to pay cash","to open an account"], correct:1, explanation:"'Rood staan' = to be overdrawn / in the red on your account." },
+      { type:"multiple_choice", question:"Hoe vraag je beleefd? '___ ik graag een rekening openen.'", options:["Zal","Zou","Zult","Zei"], correct:1, explanation:"'Ik zou graag ... willen' = I would like to ... 'Zou' is the polite conditional (van zullen)." },
+      { type:"word_order", question:"Maak een correcte zin:", words:["Ik","heb","een","rekening","nodig"], correct:"Ik heb een rekening nodig", explanation:"'... nodig hebben' = to need. Het object staat tussen 'heb' en 'nodig'." },
+      { type:"fill_blank", sentence:["Je werkgever kan elke maand je geld ","."], blank:"overmaken", hint:"transfer (infinitief aan het eind)", explanation:"Met een modaal/hulpwerkwoord (kan) gaat het hele werkwoord naar het eind: '... kan ... overmaken.'" },
+      { type:"multiple_choice", question:"Wat is een 'geldautomaat'?", options:["a bank employee","a cash machine / ATM","a credit card","an invoice"], correct:1, explanation:"'Geldautomaat' = ATM / cash machine. geld (money) + automaat (machine)." },
+      { type:"multiple_choice", question:"De bank heeft dit ___ geregeld. (= automatically)", options:["noodzakelijk","automatisch","contant","gemiddeld"], correct:1, explanation:"'Automatisch' = automatically. contant = cash; noodzakelijk = necessary." },
+      { type:"multiple_choice", question:"Hoe zeg je 'I have spent a lot this month'?", options:["Ik heb deze maand veel ontvangen.","Ik heb deze maand veel uitgegeven.","Ik heb deze maand veel bewaard.","Ik heb deze maand veel gekozen."], correct:1, explanation:"'Uitgeven' = to spend → uitgegeven. ontvangen = receive; bewaren = save." }
+    ]
+  },
+
+  20: {
+    title: "Les 20 – De mooiste reis",
+    grammarTip: {
+      title: "🔑 Verleden tijd (imperfectum) — onregelmatige werkwoorden",
+      table: [
+        ["gaan", "ging / gingen", "went"],
+        ["komen", "kwam / kwamen", "came"],
+        ["rijden", "reed / reden", "drove"],
+        ["vertrekken", "vertrok / vertrokken", "left"],
+        ["zitten", "zat / zaten", "sat"]
+      ],
+      headers: ["Infinitief", "Verleden tijd", "EN"]
+    },
+    exercises: [
+      { type:"multiple_choice", question:"Verleden tijd van 'gaan' (enkelvoud): Ik ___ naar China.", options:["gaat","ging","gegaan","gingen"], correct:1, explanation:"'Ik ging' = I went. gaan → ging (enkelvoud) / gingen (meervoud)." },
+      { type:"match_pairs", question:"Koppel infinitief met verleden tijd:", pairs:[{nl:"komen",en:"kwam"},{nl:"rijden",en:"reed"},{nl:"vliegen",en:"vloog"},{nl:"zitten",en:"zat"}] },
+      { type:"fill_blank", sentence:["Als kind ","ik vliegen heel bijzonder."], blank:"vond", hint:"vinden → verleden tijd (enkelvoud)", explanation:"'Vond' = found/thought. vinden → vond / vonden." },
+      { type:"multiple_choice", question:"Wat betekent 'reizen'?", options:["to drive","to travel","to fly","to leave"], correct:1, explanation:"'Reizen' = to travel. de reis = the journey/trip." },
+      { type:"multiple_choice", question:"We ___ met het vliegtuig naar Londen. (verleden tijd, meervoud)", options:["vloog","vlogen","vliegen","gevlogen"], correct:1, explanation:"'Vlogen' = flew (meervoud). vliegen → vloog / vlogen." },
+      { type:"word_order", question:"Maak een correcte zin in de verleden tijd:", words:["We","reden","naar","de","bergen"], correct:"We reden naar de bergen", explanation:"'reden' = drove (meervoud van rijden). Verb in tweede positie." },
+      { type:"fill_blank", sentence:["Mijn langste reis ","naar China."], blank:"was", hint:"zijn → verleden tijd (enkelvoud)", explanation:"'Was' = was. zijn → was / waren." },
+      { type:"multiple_choice", question:"Wat is het voltooid deelwoord van 'vertrekken'?", options:["vertrekt","vertrok","vertrokken","gevertrek"], correct:2, explanation:"'Vertrokken' = departed/left. Met 'zijn': 'De trein is vertrokken.'" },
+      { type:"multiple_choice", question:"Hoe zeg je 'a few years ago'?", options:["een paar jaar geleden","een paar jaar later","over een paar jaar","een paar jaar lang"], correct:0, explanation:"'... geleden' = ago. 'een paar jaar geleden' = a few years ago." },
+      { type:"multiple_choice", question:"Verleden tijd: De reis ___ veel geld. (kosten)", options:["kost","kostte","gekost","kostten"], correct:1, explanation:"'Kostte' = cost (enkelvoud verleden). kosten → kostte / kostten (regelmatig met dubbele t)." }
+    ]
+  },
+
+  21: {
+    title: "Les 21 – Een dagje uit",
+    grammarTip: {
+      title: "🔑 Plannen maken & voorstellen",
+      table: [
+        ["Zullen we ...?", "Shall we ...? (suggestion)"],
+        ["voorstellen", "to propose / suggest"],
+        ["afspreken", "to make an appointment"],
+        ["het lijkt me ...", "it seems ... to me"],
+        ["akkoord / prima", "agreed / fine"]
+      ],
+      headers: ["Nederlands", "Engels"]
+    },
+    exercises: [
+      { type:"multiple_choice", question:"'___ we naar het museum gaan?' (= Shall we...?)", options:["Zullen","Zouden","Zeiden","Zijn"], correct:0, explanation:"'Zullen we ...?' = Shall we ...? Standaardmanier om iets voor te stellen." },
+      { type:"match_pairs", question:"Koppel:", pairs:[{nl:"voorstellen",en:"to propose"},{nl:"reserveren",en:"to reserve"},{nl:"afspreken",en:"to arrange"},{nl:"proberen",en:"to try"}] },
+      { type:"fill_blank", sentence:["Dat ","me een goed idee."], blank:"lijkt", hint:"lijken (hij/het-vorm)", explanation:"'Dat lijkt me een goed idee' = That seems like a good idea to me. lijken → lijkt." },
+      { type:"multiple_choice", question:"Wat betekent 'akkoord'?", options:["wrong","in agreement / agreed","expensive","later"], correct:1, explanation:"'Akkoord' = agreed / in agreement. 'Ik ben akkoord.' = I agree." },
+      { type:"multiple_choice", question:"We willen een tafel in het restaurant. We moeten ___.", options:["reserveren","proberen","verliezen","delen"], correct:0, explanation:"'Reserveren' = to make a reservation. een tafel reserveren." },
+      { type:"word_order", question:"Maak een voorstel:", words:["Zullen","we","samen","eten"], correct:"Zullen we samen eten", explanation:"'Zullen we ...?' opent een voorstel. Werkwoord vooraan bij ja/nee-vraag." },
+      { type:"fill_blank", sentence:["We gaan met z'n ","naar het feest."], blank:"tienen", hint:"with ten people = met z'n ...", explanation:"'Met z'n tienen' = with ten (people together). met z'n tweeën, met z'n drieën, ..." },
+      { type:"multiple_choice", question:"Hoe zeg je 'I hear something nice' / 'sounds good'? → '___'", options:["Dat hoor ik graag","Dat verlies ik","Dat deel ik","Dat reserveer ik"], correct:0, explanation:"'Dat hoor ik graag' = glad to hear that. horen = to hear." },
+      { type:"multiple_choice", question:"Het restaurant is ___ het station. (= behind)", options:["naast","achter","rond","midden"], correct:1, explanation:"'Achter' = behind. naast = next to; rond = around." },
+      { type:"multiple_choice", question:"Wat betekent 'het lijkt me prima'?", options:["it seems wrong to me","it seems perfectly fine to me","I have to try","it is too expensive"], correct:1, explanation:"'Prima' = fine/great. 'Het lijkt me prima' = It seems perfectly fine to me." }
+    ]
+  },
+
+  22: {
+    title: "Les 22 – De Nederlandse bevolking",
+    grammarTip: {
+      title: "🔑 Cijfers, vergelijken & 'er waren'",
+      table: [
+        ["de bevolking", "the population"],
+        ["het aantal", "the number (of)"],
+        ["gemiddeld", "average"],
+        ["toegenomen / afgenomen", "increased / decreased"],
+        ["er waren ...", "there were ... (verleden van 'er zijn')"]
+      ],
+      headers: ["Nederlands", "Engels"]
+    },
+    exercises: [
+      { type:"multiple_choice", question:"Verleden tijd: 'Vroeger ___ er veel minder mensen.'", options:["zijn","was","waren","is"], correct:2, explanation:"'Er waren ...' = There were ... (meervoud). zijn → was (ev) / waren (mv)." },
+      { type:"match_pairs", question:"Koppel:", pairs:[{nl:"bevolking",en:"population"},{nl:"inwoners",en:"inhabitants"},{nl:"groei",en:"growth"},{nl:"vrijheid",en:"freedom"}] },
+      { type:"fill_blank", sentence:["Het aantal christenen is ","."], blank:"afgenomen", hint:"afnemen → voltooid deelwoord (decreased)", explanation:"'Afgenomen' = decreased. afnemen → is afgenomen. Tegengestelde: toegenomen (increased)." },
+      { type:"multiple_choice", question:"Wat betekent 'gemiddeld'?", options:["maximum","average","minimum","total"], correct:1, explanation:"'Gemiddeld' = average. het gemiddelde = the average." },
+      { type:"multiple_choice", question:"Nederland is dichtbevolkt: er wonen veel mensen per ___.", options:["kilometer","jaar","euro","persoon"], correct:0, explanation:"'Per kilometer' (per vierkante km). dicht = dense; dichtbevolkt = densely populated." },
+      { type:"word_order", question:"Maak een correcte zin:", words:["Het","aantal","mensen","is","gegroeid"], correct:"Het aantal mensen is gegroeid", explanation:"Perfectum met 'zijn' (groeien = verandering). Voltooid deelwoord 'gegroeid' aan het eind." },
+      { type:"fill_blank", sentence:["Mensen komen naar Nederland: dat heet ","."], blank:"immigratie", hint:"immigration (de-woord)", explanation:"'Immigratie' = immigration. emigratie = emigration (vertrekken)." },
+      { type:"multiple_choice", question:"'Alle godsdiensten hebben ___ rechten.' (= equal)", options:["gelijke","hogere","lagere","grote"], correct:0, explanation:"'Gelijke rechten' = equal rights. gelijk = equal/same; het recht = the right." },
+      { type:"multiple_choice", question:"Wat betekent 'het hangt ervan af'?", options:["it disappears","it depends on it","it grows","it counts"], correct:1, explanation:"'Het hangt ervan af' = it depends. afhangen van = to depend on." },
+      { type:"multiple_choice", question:"De groep is nu het ___. (= biggest)", options:["groter","grootst","grote","groei"], correct:1, explanation:"Overtreffende trap: groot → groter → het grootst. 'het grootst' = the biggest." }
+    ]
+  },
+
+  23: {
+    title: "Les 23 – Op de helft",
+    grammarTip: {
+      title: "🔑 Verbindingswoorden & leren-woordenschat",
+      table: [
+        ["ondanks", "despite"],
+        ["immers", "after all"],
+        ["inmiddels", "by now"],
+        ["nauwelijks", "hardly"],
+        ["regelmatig", "regularly"],
+        ["zowat", "almost"]
+      ],
+      headers: ["Nederlands", "Engels"]
+    },
+    exercises: [
+      { type:"multiple_choice", question:"'___ het moeilijk is, blijf ik oefenen.' (= Despite)", options:["Ondanks","Omdat","Want","Sinds"], correct:0, explanation:"'Ondanks dat ...' = Despite (the fact that). ondanks + zelfstandig naamwoord ook mogelijk." },
+      { type:"match_pairs", question:"Koppel:", pairs:[{nl:"fout",en:"error"},{nl:"reden",en:"reason"},{nl:"mening",en:"opinion"},{nl:"hoofdstuk",en:"chapter"}] },
+      { type:"fill_blank", sentence:["Ik leer al ","6 maanden Nederlands."], blank:"sinds", hint:"since", explanation:"'Sinds' = since (tijdstip waarop iets begon). 'al sinds 6 maanden'." },
+      { type:"multiple_choice", question:"Wat betekent 'nauwelijks'?", options:["a lot","hardly / barely","regularly","easily"], correct:1, explanation:"'Nauwelijks' = hardly / barely. 'Ik maak nauwelijks fouten.' = I hardly make mistakes." },
+      { type:"multiple_choice", question:"Ik ben ___ op de helft van het boek. (= by now)", options:["immers","inmiddels","ondanks","slechts"], correct:1, explanation:"'Inmiddels' = by now / meanwhile. 'Ik ben inmiddels halverwege.'" },
+      { type:"word_order", question:"Maak een correcte zin:", words:["Ik","besteed","veel","tijd","aan","grammatica"], correct:"Ik besteed veel tijd aan grammatica", explanation:"'tijd besteden aan ...' = to spend time on ... Vaste combinatie met 'aan'." },
+      { type:"fill_blank", sentence:["Ben je het ","mij eens?"], blank:"met", hint:"to agree WITH someone", explanation:"'Het eens zijn MET iemand' = to agree with someone. Vaste prepositie 'met'." },
+      { type:"multiple_choice", question:"Wat betekent 'beseffen'?", options:["to forget","to realise","to repeat","to count"], correct:1, explanation:"'Beseffen' = to realise / become aware. 'Ik besef dat het moeilijk is.'" },
+      { type:"multiple_choice", question:"Het is ___ om regelmatig te oefenen. (= easier)", options:["makkelijk","makkelijker","makkelijkst","moeilijk"], correct:1, explanation:"Vergrotende trap: makkelijk → makkelijker → makkelijkst." },
+      { type:"multiple_choice", question:"Hoe zeg je 'I can hardly remember it'?", options:["Ik kan het goed onthouden.","Ik kan het nauwelijks onthouden.","Ik kan het makkelijk vergeten.","Ik kan het regelmatig herhalen."], correct:1, explanation:"'onthouden' = to remember; 'nauwelijks' = hardly. Combinatie geeft de betekenis." }
+    ]
+  },
+
+  24: {
+    title: "Les 24 – Trouwen of samenwonen?",
+    grammarTip: {
+      title: "🔑 Relaties & verleden tijd (regelmatig)",
+      table: [
+        ["trouwen", "to marry"],
+        ["samenwonen", "to live together"],
+        ["maakte / maakten", "made (verleden van maken)"],
+        ["beloofde / beloofden", "promised"],
+        ["vertelde / vertelden", "told"]
+      ],
+      headers: ["Nederlands", "Engels / vorm"]
+    },
+    exercises: [
+      { type:"multiple_choice", question:"Verleden tijd van 'maken' (enkelvoud): Het feest ___ veel indruk.", options:["maakt","maakte","gemaakt","maakten"], correct:1, explanation:"'Maakte' = made. maken → maakte / maakten (regelmatig, 't kofschip → -te)." },
+      { type:"match_pairs", question:"Koppel:", pairs:[{nl:"trouwen",en:"to marry"},{nl:"getuige",en:"witness"},{nl:"huwelijk",en:"marriage"},{nl:"scheiding",en:"divorce"}] },
+      { type:"fill_blank", sentence:["Ze ","elkaar eeuwige liefde."], blank:"beloofden", hint:"beloven → verleden tijd (meervoud)", explanation:"'Beloofden' = promised (mv). beloven → beloofde / beloofden." },
+      { type:"multiple_choice", question:"Wat is het tegenovergestelde van 'trouwen'?", options:["samenwonen","scheiden","beloven","blijven"], correct:1, explanation:"'Scheiden' = to divorce/separate. de scheiding = the divorce." },
+      { type:"multiple_choice", question:"Sommige mensen willen liever alleen ___. (= stay)", options:["blijven","trouwen","vertellen","beloven"], correct:0, explanation:"'Blijven' = to stay. 'liever alleen blijven' = prefer to stay single." },
+      { type:"word_order", question:"Maak een correcte zin (verleden tijd):", words:["Hij","vertelde","een","mooi","verhaal"], correct:"Hij vertelde een mooi verhaal", explanation:"'vertelde' = told (ev verleden van vertellen). Werkwoord in tweede positie." },
+      { type:"fill_blank", sentence:["Op het feest waren wel 150 ","."], blank:"gasten", hint:"guests (meervoud van gast)", explanation:"'Gasten' = guests. de gast → de gasten." },
+      { type:"multiple_choice", question:"Wat betekent 'verplicht'?", options:["optional","obligated / required","free","negative"], correct:1, explanation:"'Verplicht' = obligated / required. de verplichting = the obligation." },
+      { type:"multiple_choice", question:"Ze gaan naar het ___ om te trouwen. (= city hall)", options:["gemeentehuis","ziekenhuis","politiebureau","station"], correct:0, explanation:"'Gemeentehuis' = city hall / town hall. de gemeente = municipality." },
+      { type:"multiple_choice", question:"Hoe zeg je 'They got married last year'?", options:["Ze trouwen volgend jaar.","Ze trouwden vorig jaar.","Ze gaan vorig jaar trouwen.","Ze zijn vorig jaar getrouwd / Ze trouwden vorig jaar."], correct:3, explanation:"Beide kloppen: perfectum 'zijn getrouwd' of imperfectum 'trouwden'. Voor afgesloten verleden gebeurtenis zijn beide juist." }
+    ]
+  },
+
+  25: {
+    title: "Les 25 – De kaart van Nederland",
+    grammarTip: {
+      title: "🔑 Geografie & windrichtingen",
+      table: [
+        ["het noorden", "the north"],
+        ["het zuiden", "the south"],
+        ["het oosten", "the east"],
+        ["het westen", "the west"],
+        ["onder/boven zeeniveau", "below/above sea level"]
+      ],
+      headers: ["Nederlands", "Engels"]
+    },
+    exercises: [
+      { type:"multiple_choice", question:"Limburg ligt in het ___ van Nederland. (= south)", options:["noorden","zuiden","oosten","westen"], correct:1, explanation:"'Het zuiden' = the south. Limburg is de zuidelijkste provincie." },
+      { type:"match_pairs", question:"Koppel windrichtingen:", pairs:[{nl:"noord",en:"north"},{nl:"zuid",en:"south"},{nl:"oost",en:"east"},{nl:"west",en:"west"}] },
+      { type:"fill_blank", sentence:["Veel land in Nederland ligt onder ","."], blank:"zeeniveau", hint:"sea level (het-woord)", explanation:"'Zeeniveau' = sea level. zee (sea) + niveau (level)." },
+      { type:"multiple_choice", question:"Verleden tijd van 'zien': Ik ___ een mooie kaart.", options:["zie","zag","gezien","zagen"], correct:1, explanation:"'Zag' = saw (ev). zien → zag / zagen." },
+      { type:"multiple_choice", question:"Wat houdt het water tegen? De ___.", options:["bergen","dijken","steden","wegen"], correct:1, explanation:"'Dijken' = dikes. De dijk beschermt het land tegen het water." },
+      { type:"word_order", question:"Maak een correcte zin:", words:["De","steden","liggen","in","het","westen"], correct:"De steden liggen in het westen", explanation:"'liggen' = to be located. Werkwoord tweede positie; plaatsbepaling achteraan." },
+      { type:"fill_blank", sentence:["Nederland grenst aan België en ","."], blank:"Duitsland", hint:"Germany", explanation:"'Duitsland' = Germany. grenzen aan = to border on; de grens = the border." },
+      { type:"multiple_choice", question:"Wat betekent 'gebeuren'?", options:["to build","to happen","to grow","to break"], correct:1, explanation:"'Gebeuren' = to happen. 'Er gebeurde iets.' = Something happened." },
+      { type:"multiple_choice", question:"De Randstad ligt in het ___ van het land.", options:["zuidwesten","noordoosten","westen","midden"], correct:2, explanation:"De Randstad (Amsterdam, Rotterdam, Den Haag, Utrecht) ligt in het westen." },
+      { type:"multiple_choice", question:"Hoe zeg je 'the lowest point'?", options:["het hoogste punt","het laagste punt","het grootste punt","het verste punt"], correct:1, explanation:"'het laagste punt' = the lowest point. laag → lager → het laagst." }
+    ]
+  },
+
+  26: {
+    title: "Les 26 – De politie",
+    grammarTip: {
+      title: "🔑 Verleden tijd verhaal & politie-woorden",
+      table: [
+        ["reed (rijden)", "drove"],
+        ["zag (zien)", "saw"],
+        ["dacht (denken)", "thought"],
+        ["een ongeluk", "an accident"],
+        ["aangifte doen", "to file a police report"]
+      ],
+      headers: ["Nederlands", "Engels"]
+    },
+    exercises: [
+      { type:"multiple_choice", question:"Verleden tijd van 'denken': Toen ik de politie zag, ___ ik...", options:["denk","dacht","gedacht","dachten"], correct:1, explanation:"'Dacht' = thought. denken → dacht / dachten (onregelmatig)." },
+      { type:"match_pairs", question:"Koppel:", pairs:[{nl:"politie",en:"police"},{nl:"ongeluk",en:"accident"},{nl:"boete",en:"fine"},{nl:"aangifte",en:"police report"}] },
+      { type:"fill_blank", sentence:["Mijn fiets is ","; ik moet aangifte doen."], blank:"gestolen", hint:"stelen → voltooid deelwoord (stolen)", explanation:"'Gestolen' = stolen. stelen → gestolen (onregelmatig)." },
+      { type:"multiple_choice", question:"Wat betekent 'aangifte doen'?", options:["to pay a fine","to file a police report","to call a friend","to drive a car"], correct:1, explanation:"'Aangifte doen' = to file a police report (bij de politie)." },
+      { type:"multiple_choice", question:"Verleden tijd van 'rijden': De politie ___ achter mij.", options:["rijdt","reed","gereden","reden"], correct:1, explanation:"'Reed' = drove (ev). rijden → reed / reden." },
+      { type:"word_order", question:"Maak een correcte zin (verleden tijd):", words:["De","politie","hielp","mij","meteen"], correct:"De politie hielp mij meteen", explanation:"'hielp' = helped (ev verleden van helpen, onregelmatig). meteen = immediately." },
+      { type:"fill_blank", sentence:["Als je te hard rijdt, krijg je een ","."], blank:"boete", hint:"fine / penalty (de-woord)", explanation:"'Boete' = fine. een boete betalen = to pay a fine." },
+      { type:"multiple_choice", question:"Wat betekent 'inbreken'?", options:["to break a glass","to break into (burgle)","to break up","to break down"], correct:1, explanation:"'Inbreken' = to break in / burgle. de inbraak = the burglary." },
+      { type:"multiple_choice", question:"De agent ___ mij de weg uit. (= explains)", options:["legt ... uit","doet ... uit","maakt ... uit","wijst ... uit"], correct:0, explanation:"'uitleggen' = to explain. De agent legt de weg uit. (scheidbaar)." },
+      { type:"multiple_choice", question:"Hoe zeg je 'Something strange happened'?", options:["Er gebeurde iets vreemds.","Er gebeurt iets moois.","Er is iets veiligs.","Er reed iets raars."], correct:0, explanation:"'gebeurde' = happened (verleden); 'iets vreemds' = something strange." }
+    ]
+  }
+};
+
+// ═══════════════════ VERB DATABASE ═══════════════════
+// Extracted from Nederlands voor buitenlanders (Delftse Methode), Lessen 1–26.
+// Each verb: infinitive, meaning (EN), present (ik/jij/hij), perfectum (aux + participle),
+// imperfectum (sing/plur), future (gaan/zullen), irregular flag, lesson where introduced.
+//
+// Tenses included per the book + user request (also Imperfectum & Futuro):
+//  - tt   = tegenwoordige tijd (present)
+//  - perf = voltooid tegenwoordige tijd (present perfect)
+//  - ovt  = onvolmaakt verleden tijd (simple past / imperfectum)
+//  - futur= toekomende tijd (gaan/zullen + infinitive)
+
+const VERBS = [
+  // ── Core irregular high-frequency verbs ──
+  { inf:"zijn", en:"to be", tt:{ik:"ben",jij:"bent",hij:"is",wij:"zijn"}, perf:{aux:"zijn",pp:"geweest"}, ovt:{sing:"was",plur:"waren"}, irregular:true, les:1, freq:5 },
+  { inf:"hebben", en:"to have", tt:{ik:"heb",jij:"hebt",hij:"heeft",wij:"hebben"}, perf:{aux:"hebben",pp:"gehad"}, ovt:{sing:"had",plur:"hadden"}, irregular:true, les:3, freq:5 },
+  { inf:"worden", en:"to become", tt:{ik:"word",jij:"wordt",hij:"wordt",wij:"worden"}, perf:{aux:"zijn",pp:"geworden"}, ovt:{sing:"werd",plur:"werden"}, irregular:true, les:7, freq:4 },
+
+  // ── Modal verbs ──
+  { inf:"kunnen", en:"can / to be able to", tt:{ik:"kan",jij:"kunt",hij:"kan",wij:"kunnen"}, perf:{aux:"hebben",pp:"gekund"}, ovt:{sing:"kon",plur:"konden"}, irregular:true, les:7, freq:5 },
+  { inf:"moeten", en:"must / to have to", tt:{ik:"moet",jij:"moet",hij:"moet",wij:"moeten"}, perf:{aux:"hebben",pp:"gemoeten"}, ovt:{sing:"moest",plur:"moesten"}, irregular:true, les:5, freq:5 },
+  { inf:"mogen", en:"may / to be allowed", tt:{ik:"mag",jij:"mag",hij:"mag",wij:"mogen"}, perf:{aux:"hebben",pp:"gemogen"}, ovt:{sing:"mocht",plur:"mochten"}, irregular:true, les:7, freq:4 },
+  { inf:"willen", en:"to want", tt:{ik:"wil",jij:"wilt",hij:"wil",wij:"willen"}, perf:{aux:"hebben",pp:"gewild"}, ovt:{sing:"wilde",plur:"wilden"}, irregular:true, les:7, freq:5 },
+  { inf:"zullen", en:"will / shall", tt:{ik:"zal",jij:"zult",hij:"zal",wij:"zullen"}, perf:{aux:null,pp:null}, ovt:{sing:"zou",plur:"zouden"}, irregular:true, les:19, freq:4 },
+  { inf:"hoeven", en:"to need to (neg.)", tt:{ik:"hoef",jij:"hoeft",hij:"hoeft",wij:"hoeven"}, perf:{aux:"hebben",pp:"gehoeven"}, ovt:{sing:"hoefde",plur:"hoefden"}, irregular:false, les:12, freq:3 },
+
+  // ── Lesson 1–6 regular & semi-regular ──
+  { inf:"heten", en:"to be called", tt:{ik:"heet",jij:"heet",hij:"heet",wij:"heten"}, perf:{aux:"hebben",pp:"geheten"}, ovt:{sing:"heette",plur:"heetten"}, irregular:false, les:1, freq:3 },
+  { inf:"komen", en:"to come", tt:{ik:"kom",jij:"komt",hij:"komt",wij:"komen"}, perf:{aux:"zijn",pp:"gekomen"}, ovt:{sing:"kwam",plur:"kwamen"}, irregular:true, les:1, freq:5 },
+  { inf:"wonen", en:"to live / reside", tt:{ik:"woon",jij:"woont",hij:"woont",wij:"wonen"}, perf:{aux:"hebben",pp:"gewoond"}, ovt:{sing:"woonde",plur:"woonden"}, irregular:false, les:1, freq:4 },
+  { inf:"zeggen", en:"to say", tt:{ik:"zeg",jij:"zegt",hij:"zegt",wij:"zeggen"}, perf:{aux:"hebben",pp:"gezegd"}, ovt:{sing:"zei",plur:"zeiden"}, irregular:true, les:1, freq:5 },
+  { inf:"werken", en:"to work", tt:{ik:"werk",jij:"werkt",hij:"werkt",wij:"werken"}, perf:{aux:"hebben",pp:"gewerkt"}, ovt:{sing:"werkte",plur:"werkten"}, irregular:false, les:5, freq:4 },
+  { inf:"gaan", en:"to go", tt:{ik:"ga",jij:"gaat",hij:"gaat",wij:"gaan"}, perf:{aux:"zijn",pp:"gegaan"}, ovt:{sing:"ging",plur:"gingen"}, irregular:true, les:5, freq:5 },
+  { inf:"opstaan", en:"to get up", tt:{ik:"sta op",jij:"staat op",hij:"staat op",wij:"staan op"}, perf:{aux:"zijn",pp:"opgestaan"}, ovt:{sing:"stond op",plur:"stonden op"}, irregular:true, les:5, freq:3, separable:true },
+  { inf:"drinken", en:"to drink", tt:{ik:"drink",jij:"drinkt",hij:"drinkt",wij:"drinken"}, perf:{aux:"hebben",pp:"gedronken"}, ovt:{sing:"dronk",plur:"dronken"}, irregular:true, les:5, freq:4 },
+  { inf:"eten", en:"to eat", tt:{ik:"eet",jij:"eet",hij:"eet",wij:"eten"}, perf:{aux:"hebben",pp:"gegeten"}, ovt:{sing:"at",plur:"aten"}, irregular:true, les:8, freq:4 },
+  { inf:"kosten", en:"to cost", tt:{ik:"kost",jij:"kost",hij:"kost",wij:"kosten"}, perf:{aux:"hebben",pp:"gekost"}, ovt:{sing:"kostte",plur:"kostten"}, irregular:false, les:6, freq:3 },
+  { inf:"betalen", en:"to pay", tt:{ik:"betaal",jij:"betaalt",hij:"betaalt",wij:"betalen"}, perf:{aux:"hebben",pp:"betaald"}, ovt:{sing:"betaalde",plur:"betaalden"}, irregular:false, les:6, freq:3 },
+  { inf:"kopen", en:"to buy", tt:{ik:"koop",jij:"koopt",hij:"koopt",wij:"kopen"}, perf:{aux:"hebben",pp:"gekocht"}, ovt:{sing:"kocht",plur:"kochten"}, irregular:true, les:13, freq:4 },
+
+  // ── Lesson 7–12 ──
+  { inf:"leren", en:"to learn / teach", tt:{ik:"leer",jij:"leert",hij:"leert",wij:"leren"}, perf:{aux:"hebben",pp:"geleerd"}, ovt:{sing:"leerde",plur:"leerden"}, irregular:false, les:7, freq:4 },
+  { inf:"lezen", en:"to read", tt:{ik:"lees",jij:"leest",hij:"leest",wij:"lezen"}, perf:{aux:"hebben",pp:"gelezen"}, ovt:{sing:"las",plur:"lazen"}, irregular:true, les:7, freq:4 },
+  { inf:"luisteren", en:"to listen", tt:{ik:"luister",jij:"luistert",hij:"luistert",wij:"luisteren"}, perf:{aux:"hebben",pp:"geluisterd"}, ovt:{sing:"luisterde",plur:"luisterden"}, irregular:false, les:7, freq:3 },
+  { inf:"begrijpen", en:"to understand", tt:{ik:"begrijp",jij:"begrijpt",hij:"begrijpt",wij:"begrijpen"}, perf:{aux:"hebben",pp:"begrepen"}, ovt:{sing:"begreep",plur:"begrepen"}, irregular:true, les:7, freq:4 },
+  { inf:"verstaan", en:"to understand (hear)", tt:{ik:"versta",jij:"verstaat",hij:"verstaat",wij:"verstaan"}, perf:{aux:"hebben",pp:"verstaan"}, ovt:{sing:"verstond",plur:"verstonden"}, irregular:true, les:7, freq:2 },
+  { inf:"spreken", en:"to speak", tt:{ik:"spreek",jij:"spreekt",hij:"spreekt",wij:"spreken"}, perf:{aux:"hebben",pp:"gesproken"}, ovt:{sing:"sprak",plur:"spraken"}, irregular:true, les:7, freq:4 },
+  { inf:"zoeken", en:"to search / look for", tt:{ik:"zoek",jij:"zoekt",hij:"zoekt",wij:"zoeken"}, perf:{aux:"hebben",pp:"gezocht"}, ovt:{sing:"zocht",plur:"zochten"}, irregular:true, les:7, freq:3 },
+  { inf:"herhalen", en:"to repeat", tt:{ik:"herhaal",jij:"herhaalt",hij:"herhaalt",wij:"herhalen"}, perf:{aux:"hebben",pp:"herhaald"}, ovt:{sing:"herhaalde",plur:"herhaalden"}, irregular:false, les:7, freq:2 },
+  { inf:"oefenen", en:"to practise", tt:{ik:"oefen",jij:"oefent",hij:"oefent",wij:"oefenen"}, perf:{aux:"hebben",pp:"geoefend"}, ovt:{sing:"oefende",plur:"oefenden"}, irregular:false, les:7, freq:3 },
+  { inf:"koken", en:"to cook", tt:{ik:"kook",jij:"kookt",hij:"kookt",wij:"koken"}, perf:{aux:"hebben",pp:"gekookt"}, ovt:{sing:"kookte",plur:"kookten"}, irregular:false, les:8, freq:3 },
+  { inf:"beginnen", en:"to begin", tt:{ik:"begin",jij:"begint",hij:"begint",wij:"beginnen"}, perf:{aux:"zijn",pp:"begonnen"}, ovt:{sing:"begon",plur:"begonnen"}, irregular:true, les:9, freq:3 },
+  { inf:"wachten", en:"to wait", tt:{ik:"wacht",jij:"wacht",hij:"wacht",wij:"wachten"}, perf:{aux:"hebben",pp:"gewacht"}, ovt:{sing:"wachtte",plur:"wachtten"}, irregular:false, les:12, freq:3 },
+  { inf:"lopen", en:"to walk", tt:{ik:"loop",jij:"loopt",hij:"loopt",wij:"lopen"}, perf:{aux:"zijn/hebben",pp:"gelopen"}, ovt:{sing:"liep",plur:"liepen"}, irregular:true, les:12, freq:4 },
+  { inf:"fietsen", en:"to cycle", tt:{ik:"fiets",jij:"fietst",hij:"fietst",wij:"fietsen"}, perf:{aux:"zijn/hebben",pp:"gefietst"}, ovt:{sing:"fietste",plur:"fietsten"}, irregular:false, les:5, freq:3 },
+  { inf:"overstappen", en:"to transfer (transport)", tt:{ik:"stap over",jij:"stapt over",hij:"stapt over",wij:"stappen over"}, perf:{aux:"zijn",pp:"overgestapt"}, ovt:{sing:"stapte over",plur:"stapten over"}, irregular:false, les:12, freq:2, separable:true },
+  { inf:"uitleggen", en:"to explain", tt:{ik:"leg uit",jij:"legt uit",hij:"legt uit",wij:"leggen uit"}, perf:{aux:"hebben",pp:"uitgelegd"}, ovt:{sing:"legde uit",plur:"legden uit"}, irregular:false, les:12, freq:3, separable:true },
+
+  // ── Lesson 13–18 ──
+  { inf:"doen", en:"to do", tt:{ik:"doe",jij:"doet",hij:"doet",wij:"doen"}, perf:{aux:"hebben",pp:"gedaan"}, ovt:{sing:"deed",plur:"deden"}, irregular:true, les:13, freq:5 },
+  { inf:"geven", en:"to give", tt:{ik:"geef",jij:"geeft",hij:"geeft",wij:"geven"}, perf:{aux:"hebben",pp:"gegeven"}, ovt:{sing:"gaf",plur:"gaven"}, irregular:true, les:13, freq:4 },
+  { inf:"krijgen", en:"to get / receive", tt:{ik:"krijg",jij:"krijgt",hij:"krijgt",wij:"krijgen"}, perf:{aux:"hebben",pp:"gekregen"}, ovt:{sing:"kreeg",plur:"kregen"}, irregular:true, les:13, freq:4 },
+  { inf:"slapen", en:"to sleep", tt:{ik:"slaap",jij:"slaapt",hij:"slaapt",wij:"slapen"}, perf:{aux:"hebben",pp:"geslapen"}, ovt:{sing:"sliep",plur:"sliepen"}, irregular:true, les:13, freq:3 },
+  { inf:"organiseren", en:"to organise", tt:{ik:"organiseer",jij:"organiseert",hij:"organiseert",wij:"organiseren"}, perf:{aux:"hebben",pp:"georganiseerd"}, ovt:{sing:"organiseerde",plur:"organiseerden"}, irregular:false, les:13, freq:2 },
+  { inf:"houden", en:"to hold / love", tt:{ik:"hou",jij:"houdt",hij:"houdt",wij:"houden"}, perf:{aux:"hebben",pp:"gehouden"}, ovt:{sing:"hield",plur:"hielden"}, irregular:true, les:14, freq:4 },
+  { inf:"spelen", en:"to play", tt:{ik:"speel",jij:"speelt",hij:"speelt",wij:"spelen"}, perf:{aux:"hebben",pp:"gespeeld"}, ovt:{sing:"speelde",plur:"speelden"}, irregular:false, les:14, freq:3 },
+  { inf:"kijken", en:"to watch / look", tt:{ik:"kijk",jij:"kijkt",hij:"kijkt",wij:"kijken"}, perf:{aux:"hebben",pp:"gekeken"}, ovt:{sing:"keek",plur:"keken"}, irregular:true, les:14, freq:4 },
+  { inf:"reizen", en:"to travel", tt:{ik:"reis",jij:"reist",hij:"reist",wij:"reizen"}, perf:{aux:"zijn/hebben",pp:"gereisd"}, ovt:{sing:"reisde",plur:"reisden"}, irregular:false, les:14, freq:3 },
+  { inf:"bestellen", en:"to order", tt:{ik:"bestel",jij:"bestelt",hij:"bestelt",wij:"bestellen"}, perf:{aux:"hebben",pp:"besteld"}, ovt:{sing:"bestelde",plur:"bestelden"}, irregular:false, les:15, freq:3 },
+  { inf:"aankomen", en:"to arrive", tt:{ik:"kom aan",jij:"komt aan",hij:"komt aan",wij:"komen aan"}, perf:{aux:"zijn",pp:"aangekomen"}, ovt:{sing:"kwam aan",plur:"kwamen aan"}, irregular:true, les:15, freq:3, separable:true },
+  { inf:"bellen", en:"to call (phone)", tt:{ik:"bel",jij:"belt",hij:"belt",wij:"bellen"}, perf:{aux:"hebben",pp:"gebeld"}, ovt:{sing:"belde",plur:"belden"}, irregular:false, les:15, freq:3 },
+
+  // ── Lesson 19–26 (later verbs, several irregular past forms) ──
+  { inf:"kiezen", en:"to choose", tt:{ik:"kies",jij:"kiest",hij:"kiest",wij:"kiezen"}, perf:{aux:"hebben",pp:"gekozen"}, ovt:{sing:"koos",plur:"kozen"}, irregular:true, les:19, freq:3 },
+  { inf:"overmaken", en:"to transfer (money)", tt:{ik:"maak over",jij:"maakt over",hij:"maakt over",wij:"maken over"}, perf:{aux:"hebben",pp:"overgemaakt"}, ovt:{sing:"maakte over",plur:"maakten over"}, irregular:false, les:19, freq:2, separable:true },
+  { inf:"studeren", en:"to study", tt:{ik:"studeer",jij:"studeert",hij:"studeert",wij:"studeren"}, perf:{aux:"hebben",pp:"gestudeerd"}, ovt:{sing:"studeerde",plur:"studeerden"}, irregular:false, les:19, freq:3 },
+  { inf:"sturen", en:"to send", tt:{ik:"stuur",jij:"stuurt",hij:"stuurt",wij:"sturen"}, perf:{aux:"hebben",pp:"gestuurd"}, ovt:{sing:"stuurde",plur:"stuurden"}, irregular:false, les:19, freq:3 },
+  { inf:"regelen", en:"to arrange", tt:{ik:"regel",jij:"regelt",hij:"regelt",wij:"regelen"}, perf:{aux:"hebben",pp:"geregeld"}, ovt:{sing:"regelde",plur:"regelden"}, irregular:false, les:19, freq:2 },
+  { inf:"gebruiken", en:"to use", tt:{ik:"gebruik",jij:"gebruikt",hij:"gebruikt",wij:"gebruiken"}, perf:{aux:"hebben",pp:"gebruikt"}, ovt:{sing:"gebruikte",plur:"gebruikten"}, irregular:false, les:19, freq:3 },
+  { inf:"ontvangen", en:"to receive", tt:{ik:"ontvang",jij:"ontvangt",hij:"ontvangt",wij:"ontvangen"}, perf:{aux:"hebben",pp:"ontvangen"}, ovt:{sing:"ontving",plur:"ontvingen"}, irregular:true, les:19, freq:2 },
+  { inf:"bewaren", en:"to keep / save", tt:{ik:"bewaar",jij:"bewaart",hij:"bewaart",wij:"bewaren"}, perf:{aux:"hebben",pp:"bewaard"}, ovt:{sing:"bewaarde",plur:"bewaarden"}, irregular:false, les:19, freq:2 },
+  { inf:"vliegen", en:"to fly", tt:{ik:"vlieg",jij:"vliegt",hij:"vliegt",wij:"vliegen"}, perf:{aux:"zijn/hebben",pp:"gevlogen"}, ovt:{sing:"vloog",plur:"vlogen"}, irregular:true, les:20, freq:3 },
+  { inf:"rijden", en:"to drive / ride", tt:{ik:"rij",jij:"rijdt",hij:"rijdt",wij:"rijden"}, perf:{aux:"zijn/hebben",pp:"gereden"}, ovt:{sing:"reed",plur:"reden"}, irregular:true, les:20, freq:3 },
+  { inf:"vertrekken", en:"to depart / leave", tt:{ik:"vertrek",jij:"vertrekt",hij:"vertrekt",wij:"vertrekken"}, perf:{aux:"zijn",pp:"vertrokken"}, ovt:{sing:"vertrok",plur:"vertrokken"}, irregular:true, les:20, freq:3 },
+  { inf:"zitten", en:"to sit", tt:{ik:"zit",jij:"zit",hij:"zit",wij:"zitten"}, perf:{aux:"hebben",pp:"gezeten"}, ovt:{sing:"zat",plur:"zaten"}, irregular:true, les:20, freq:4 },
+  { inf:"bezoeken", en:"to visit", tt:{ik:"bezoek",jij:"bezoekt",hij:"bezoekt",wij:"bezoeken"}, perf:{aux:"hebben",pp:"bezocht"}, ovt:{sing:"bezocht",plur:"bezochten"}, irregular:true, les:20, freq:2 },
+  { inf:"ontmoeten", en:"to meet", tt:{ik:"ontmoet",jij:"ontmoet",hij:"ontmoet",wij:"ontmoeten"}, perf:{aux:"hebben",pp:"ontmoet"}, ovt:{sing:"ontmoette",plur:"ontmoetten"}, irregular:false, les:20, freq:2 },
+  { inf:"uitgaan", en:"to go out", tt:{ik:"ga uit",jij:"gaat uit",hij:"gaat uit",wij:"gaan uit"}, perf:{aux:"zijn",pp:"uitgegaan"}, ovt:{sing:"ging uit",plur:"gingen uit"}, irregular:true, les:21, freq:2, separable:true },
+  { inf:"staan", en:"to stand", tt:{ik:"sta",jij:"staat",hij:"staat",wij:"staan"}, perf:{aux:"hebben",pp:"gestaan"}, ovt:{sing:"stond",plur:"stonden"}, irregular:true, les:21, freq:4 },
+  { inf:"schijnen", en:"to seem / shine", tt:{ik:"schijn",jij:"schijnt",hij:"schijnt",wij:"schijnen"}, perf:{aux:"hebben",pp:"geschenen"}, ovt:{sing:"scheen",plur:"schenen"}, irregular:true, les:21, freq:2 },
+  { inf:"verliezen", en:"to lose", tt:{ik:"verlies",jij:"verliest",hij:"verliest",wij:"verliezen"}, perf:{aux:"hebben",pp:"verloren"}, ovt:{sing:"verloor",plur:"verloren"}, irregular:true, les:21, freq:2 },
+  { inf:"delen", en:"to divide / share", tt:{ik:"deel",jij:"deelt",hij:"deelt",wij:"delen"}, perf:{aux:"hebben",pp:"gedeeld"}, ovt:{sing:"deelde",plur:"deelden"}, irregular:false, les:21, freq:2 },
+  { inf:"reserveren", en:"to make a reservation", tt:{ik:"reserveer",jij:"reserveert",hij:"reserveert",wij:"reserveren"}, perf:{aux:"hebben",pp:"gereserveerd"}, ovt:{sing:"reserveerde",plur:"reserveerden"}, irregular:false, les:21, freq:2 },
+  { inf:"lijken", en:"to seem / resemble", tt:{ik:"lijk",jij:"lijkt",hij:"lijkt",wij:"lijken"}, perf:{aux:"hebben",pp:"geleken"}, ovt:{sing:"leek",plur:"leken"}, irregular:true, les:21, freq:3 },
+  { inf:"proberen", en:"to try", tt:{ik:"probeer",jij:"probeert",hij:"probeert",wij:"proberen"}, perf:{aux:"hebben",pp:"geprobeerd"}, ovt:{sing:"probeerde",plur:"probeerden"}, irregular:false, les:21, freq:3 },
+  { inf:"vinden", en:"to find / think", tt:{ik:"vind",jij:"vindt",hij:"vindt",wij:"vinden"}, perf:{aux:"hebben",pp:"gevonden"}, ovt:{sing:"vond",plur:"vonden"}, irregular:true, les:21, freq:4 },
+  { inf:"horen", en:"to hear", tt:{ik:"hoor",jij:"hoort",hij:"hoort",wij:"horen"}, perf:{aux:"hebben",pp:"gehoord"}, ovt:{sing:"hoorde",plur:"hoorden"}, irregular:false, les:21, freq:3 },
+  { inf:"afspreken", en:"to make an appointment", tt:{ik:"spreek af",jij:"spreekt af",hij:"spreekt af",wij:"spreken af"}, perf:{aux:"hebben",pp:"afgesproken"}, ovt:{sing:"sprak af",plur:"spraken af"}, irregular:true, les:21, freq:2, separable:true },
+  { inf:"afhangen", en:"to depend", tt:{ik:"hang af",jij:"hangt af",hij:"hangt af",wij:"hangen af"}, perf:{aux:"hebben",pp:"afgehangen"}, ovt:{sing:"hing af",plur:"hingen af"}, irregular:true, les:22, freq:2, separable:true },
+  { inf:"bekijken", en:"to look at / examine", tt:{ik:"bekijk",jij:"bekijkt",hij:"bekijkt",wij:"bekijken"}, perf:{aux:"hebben",pp:"bekeken"}, ovt:{sing:"bekeek",plur:"bekeken"}, irregular:true, les:22, freq:2 },
+  { inf:"groeien", en:"to grow", tt:{ik:"groei",jij:"groeit",hij:"groeit",wij:"groeien"}, perf:{aux:"zijn/hebben",pp:"gegroeid"}, ovt:{sing:"groeide",plur:"groeiden"}, irregular:false, les:22, freq:2 },
+  { inf:"leven", en:"to live (be alive)", tt:{ik:"leef",jij:"leeft",hij:"leeft",wij:"leven"}, perf:{aux:"hebben",pp:"geleefd"}, ovt:{sing:"leefde",plur:"leefden"}, irregular:false, les:22, freq:3 },
+  { inf:"geloven", en:"to believe", tt:{ik:"geloof",jij:"gelooft",hij:"gelooft",wij:"geloven"}, perf:{aux:"hebben",pp:"geloofd"}, ovt:{sing:"geloofde",plur:"geloofden"}, irregular:false, les:22, freq:3 },
+  { inf:"vaststellen", en:"to determine", tt:{ik:"stel vast",jij:"stelt vast",hij:"stelt vast",wij:"stellen vast"}, perf:{aux:"hebben",pp:"vastgesteld"}, ovt:{sing:"stelde vast",plur:"stelden vast"}, irregular:false, les:22, freq:2, separable:true },
+  { inf:"afnemen", en:"to decrease", tt:{ik:"neem af",jij:"neemt af",hij:"neemt af",wij:"nemen af"}, perf:{aux:"zijn/hebben",pp:"afgenomen"}, ovt:{sing:"nam af",plur:"namen af"}, irregular:true, les:22, freq:2, separable:true },
+  { inf:"merken", en:"to notice", tt:{ik:"merk",jij:"merkt",hij:"merkt",wij:"merken"}, perf:{aux:"hebben",pp:"gemerkt"}, ovt:{sing:"merkte",plur:"merkten"}, irregular:false, les:23, freq:2 },
+  { inf:"verklaren", en:"to explain / declare", tt:{ik:"verklaar",jij:"verklaart",hij:"verklaart",wij:"verklaren"}, perf:{aux:"hebben",pp:"verklaard"}, ovt:{sing:"verklaarde",plur:"verklaarden"}, irregular:false, les:23, freq:2 },
+  { inf:"tellen", en:"to count", tt:{ik:"tel",jij:"telt",hij:"telt",wij:"tellen"}, perf:{aux:"hebben",pp:"geteld"}, ovt:{sing:"telde",plur:"telden"}, irregular:false, les:23, freq:2 },
+  { inf:"beseffen", en:"to realise", tt:{ik:"besef",jij:"beseft",hij:"beseft",wij:"beseffen"}, perf:{aux:"hebben",pp:"beseft"}, ovt:{sing:"besefte",plur:"beseften"}, irregular:false, les:23, freq:2 },
+  { inf:"onthouden", en:"to remember", tt:{ik:"onthoud",jij:"onthoudt",hij:"onthoudt",wij:"onthouden"}, perf:{aux:"hebben",pp:"onthouden"}, ovt:{sing:"onthield",plur:"onthielden"}, irregular:true, les:23, freq:2 },
+  { inf:"besteden", en:"to spend (time/money)", tt:{ik:"besteed",jij:"besteedt",hij:"besteedt",wij:"besteden"}, perf:{aux:"hebben",pp:"besteed"}, ovt:{sing:"besteedde",plur:"besteedden"}, irregular:false, les:23, freq:2 },
+  { inf:"verdwijnen", en:"to disappear", tt:{ik:"verdwijn",jij:"verdwijnt",hij:"verdwijnt",wij:"verdwijnen"}, perf:{aux:"zijn",pp:"verdwenen"}, ovt:{sing:"verdween",plur:"verdwenen"}, irregular:true, les:23, freq:2 },
+  { inf:"trouwen", en:"to marry", tt:{ik:"trouw",jij:"trouwt",hij:"trouwt",wij:"trouwen"}, perf:{aux:"zijn/hebben",pp:"getrouwd"}, ovt:{sing:"trouwde",plur:"trouwden"}, irregular:false, les:24, freq:3 },
+  { inf:"blijven", en:"to stay", tt:{ik:"blijf",jij:"blijft",hij:"blijft",wij:"blijven"}, perf:{aux:"zijn",pp:"gebleven"}, ovt:{sing:"bleef",plur:"bleven"}, irregular:true, les:24, freq:4 },
+  { inf:"maken", en:"to make", tt:{ik:"maak",jij:"maakt",hij:"maakt",wij:"maken"}, perf:{aux:"hebben",pp:"gemaakt"}, ovt:{sing:"maakte",plur:"maakten"}, irregular:false, les:24, freq:5 },
+  { inf:"vertellen", en:"to tell", tt:{ik:"vertel",jij:"vertelt",hij:"vertelt",wij:"vertellen"}, perf:{aux:"hebben",pp:"verteld"}, ovt:{sing:"vertelde",plur:"vertelden"}, irregular:false, les:24, freq:3 },
+  { inf:"beloven", en:"to promise", tt:{ik:"beloof",jij:"belooft",hij:"belooft",wij:"beloven"}, perf:{aux:"hebben",pp:"beloofd"}, ovt:{sing:"beloofde",plur:"beloofden"}, irregular:false, les:24, freq:2 },
+  { inf:"zorgen", en:"to take care / ensure", tt:{ik:"zorg",jij:"zorgt",hij:"zorgt",wij:"zorgen"}, perf:{aux:"hebben",pp:"gezorgd"}, ovt:{sing:"zorgde",plur:"zorgden"}, irregular:false, les:24, freq:3 },
+  { inf:"eindigen", en:"to end", tt:{ik:"eindig",jij:"eindigt",hij:"eindigt",wij:"eindigen"}, perf:{aux:"zijn/hebben",pp:"geëindigd"}, ovt:{sing:"eindigde",plur:"eindigden"}, irregular:false, les:24, freq:2 },
+  { inf:"afmaken", en:"to finish", tt:{ik:"maak af",jij:"maakt af",hij:"maakt af",wij:"maken af"}, perf:{aux:"hebben",pp:"afgemaakt"}, ovt:{sing:"maakte af",plur:"maakten af"}, irregular:false, les:24, freq:2, separable:true },
+  { inf:"registreren", en:"to register", tt:{ik:"registreer",jij:"registreert",hij:"registreert",wij:"registreren"}, perf:{aux:"hebben",pp:"geregistreerd"}, ovt:{sing:"registreerde",plur:"registreerden"}, irregular:false, les:24, freq:1 },
+  { inf:"zien", en:"to see", tt:{ik:"zie",jij:"ziet",hij:"ziet",wij:"zien"}, perf:{aux:"hebben",pp:"gezien"}, ovt:{sing:"zag",plur:"zagen"}, irregular:true, les:25, freq:5 },
+  { inf:"liggen", en:"to lie / be located", tt:{ik:"lig",jij:"ligt",hij:"ligt",wij:"liggen"}, perf:{aux:"hebben",pp:"gelegen"}, ovt:{sing:"lag",plur:"lagen"}, irregular:true, les:25, freq:4 },
+  { inf:"breken", en:"to break", tt:{ik:"breek",jij:"breekt",hij:"breekt",wij:"breken"}, perf:{aux:"hebben/zijn",pp:"gebroken"}, ovt:{sing:"brak",plur:"braken"}, irregular:true, les:25, freq:2 },
+  { inf:"gebeuren", en:"to happen", tt:{ik:"-",jij:"-",hij:"gebeurt",wij:"gebeuren"}, perf:{aux:"zijn",pp:"gebeurd"}, ovt:{sing:"gebeurde",plur:"gebeurden"}, irregular:false, les:25, freq:3 },
+  { inf:"bouwen", en:"to build", tt:{ik:"bouw",jij:"bouwt",hij:"bouwt",wij:"bouwen"}, perf:{aux:"hebben",pp:"gebouwd"}, ovt:{sing:"bouwde",plur:"bouwden"}, irregular:false, les:25, freq:2 },
+  { inf:"noemen", en:"to name / call", tt:{ik:"noem",jij:"noemt",hij:"noemt",wij:"noemen"}, perf:{aux:"hebben",pp:"genoemd"}, ovt:{sing:"noemde",plur:"noemden"}, irregular:false, les:25, freq:3 },
+  { inf:"vormen", en:"to form", tt:{ik:"vorm",jij:"vormt",hij:"vormt",wij:"vormen"}, perf:{aux:"hebben",pp:"gevormd"}, ovt:{sing:"vormde",plur:"vormden"}, irregular:false, les:25, freq:2 },
+  { inf:"helpen", en:"to help", tt:{ik:"help",jij:"helpt",hij:"helpt",wij:"helpen"}, perf:{aux:"hebben",pp:"geholpen"}, ovt:{sing:"hielp",plur:"hielpen"}, irregular:true, les:26, freq:4 },
+  { inf:"stelen", en:"to steal", tt:{ik:"steel",jij:"steelt",hij:"steelt",wij:"stelen"}, perf:{aux:"hebben",pp:"gestolen"}, ovt:{sing:"stal",plur:"stalen"}, irregular:true, les:26, freq:2 },
+  { inf:"inbreken", en:"to break in", tt:{ik:"breek in",jij:"breekt in",hij:"breekt in",wij:"breken in"}, perf:{aux:"hebben/zijn",pp:"ingebroken"}, ovt:{sing:"brak in",plur:"braken in"}, irregular:true, les:26, freq:1, separable:true },
+  { inf:"tonen", en:"to show", tt:{ik:"toon",jij:"toont",hij:"toont",wij:"tonen"}, perf:{aux:"hebben",pp:"getoond"}, ovt:{sing:"toonde",plur:"toonden"}, irregular:false, les:26, freq:2 },
+  { inf:"duren", en:"to last", tt:{ik:"-",jij:"-",hij:"duurt",wij:"duren"}, perf:{aux:"hebben",pp:"geduurd"}, ovt:{sing:"duurde",plur:"duurden"}, irregular:false, les:26, freq:2 },
+  { inf:"lachen", en:"to laugh", tt:{ik:"lach",jij:"lacht",hij:"lacht",wij:"lachen"}, perf:{aux:"hebben",pp:"gelachen"}, ovt:{sing:"lachte",plur:"lachten"}, irregular:false, les:26, freq:2 },
+  { inf:"wijzen", en:"to point", tt:{ik:"wijs",jij:"wijst",hij:"wijst",wij:"wijzen"}, perf:{aux:"hebben",pp:"gewezen"}, ovt:{sing:"wees",plur:"wezen"}, irregular:true, les:26, freq:2 },
+  { inf:"laten", en:"to let / leave", tt:{ik:"laat",jij:"laat",hij:"laat",wij:"laten"}, perf:{aux:"hebben",pp:"gelaten"}, ovt:{sing:"liet",plur:"lieten"}, irregular:true, les:26, freq:4 },
+];
+
+// Tense metadata for the verb module selector
+const VERB_TENSES = [
+  { id:"tt",    label:"Tegenwoordige tijd", sub:"Presente",     color:"#1CB0F6" },
+  { id:"perf",  label:"Voltooid (perfectum)", sub:"Passado composto (heb gedaan)", color:"#58CC02" },
+  { id:"ovt",   label:"Verleden tijd (imperfectum)", sub:"Pretérito (deed/ging)", color:"#FF9600" },
+  { id:"futur", label:"Toekomende tijd", sub:"Futuro (ga/zal doen)", color:"#CE82FF" },
+  { id:"meaning", label:"Betekenis", sub:"Significado (NL ⇄ PT/EN)", color:"#FFC800" },
+];
+
+// ═══════════════════ LESSON META (correct book titles) ═══════════════════
+const UNITS = [
+  { label:"&#128205; Eenheid 1 &mdash; Kennismaken", cls:"green", lessons:[[1,"Hoe heet je?"],[2,"Uit welk land?"],[3,"Welke dag is het?"],[4,"De Nederlandse les"],[5,"Mijn dag"],[6,"Boodschappen doen"]]},
+  { label:"&#127961; Eenheid 2 &mdash; Dagelijks leven", cls:"blue", lessons:[[7,"Stap voor stap leren"],[8,"Eet smakelijk!"],[9,"Hoe kom je naar de les?"],[10,"De vier seizoenen"],[11,"Hoe wonen jullie?"],[12,"Hoe kom ik daar?"]]},
+  { label:"&#127757; Eenheid 3 &mdash; Mensen & relaties", cls:"purple", lessons:[[13,"Een leuk weekend"],[14,"Familie"],[15,"Pakje bij de buren"],[16,"School"],[17,"Wie doet het huishouden?"],[18,"De huisarts"]]},
+  { label:"&#127963; Eenheid 4 &mdash; Maatschappij", cls:"orange", lessons:[[19,"De bank"],[20,"De mooiste reis"],[21,"Een dagje uit"],[22,"De Nederlandse bevolking"],[23,"Op de helft"],[24,"Trouwen of samenwonen?"],[25,"De kaart van Nederland"],[26,"De politie"]]}
+];
+
+// ═══════════════════ STORE (in-memory; persists while tab open) ═══════════════════
+const STORE = { reviewQueue:[], mastery:{}, seenCount:{}, correctStreak:{},
+  trainLessons:null, verbTenses:null };
+
+function itemKey(ex, lessonNum){
+  const base = ex.question || (ex.sentence?ex.sentence.join('_'):'') || (ex.pairs?ex.pairs.map(p=>p.nl).join(','):'');
+  return lessonNum+'::'+ex.type+'::'+base.slice(0,60);
+}
+
+// ═══════════════════ STATE ═══════════════════
+let mode='lesson', currentLessonNum=null, queue=[], currentIndex=0, currentEx=null;
+let sessionCorrect=0, sessionWrong=0, wrongThisSession=[], isAnswered=false;
+let selectedOption=null, fillAnswer='', wbWords=[];
+let matchedPairs=0, totalPairs=0, matchSideL=null,matchSideLPair=null,matchSideR=null,matchSideRPair=null;
+let configKind=null; // 'train' | 'verb'
+
+// ═══════════════════ NAV ═══════════════════
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function goHome(){hideFeedback();hideCheckArea();showScreen('homeScreen');renderHome();window.scrollTo(0,0);}
+
+function renderHome(){
+  const n=STORE.reviewQueue.length, card=document.getElementById('reviewCard');
+  document.getElementById('reviewBadge').textContent=n;
+  if(n===0){card.classList.add('empty');document.getElementById('reviewSub').textContent='Nog geen fouten — begin met een les!';}
+  else{card.classList.remove('empty');document.getElementById('reviewSub').textContent=n+(n===1?' item om te herhalen':' items om te herhalen');}
+  document.getElementById('headerStat').innerHTML='';
+  const cont=document.getElementById('unitsContainer');
+  cont.innerHTML=UNITS.map(u=>{
+    const btns=u.lessons.map(([num,topic])=>{
+      const m=STORE.mastery[num]||0, mc=m>=0.85?'mastered':'';
+      return `<button class="lesson-btn ${mc}" onclick="startLesson(${num})"><span class="les-check">&#10003;</span><span class="les-num">${num}</span><span class="les-topic">${topic}</span><span class="les-mastery"><div style="width:${Math.round(m*100)}%"></div></span></button>`;
+    }).join('');
+    return `<div class="unit-section"><div class="unit-label ${u.cls}">${u.label}</div><div class="lesson-grid">${btns}</div></div>`;
+  }).join('');
+}
+
+// ═══════════════════ CONFIG SCREENS ═══════════════════
+function openTrainConfig(){
+  configKind='train';
+  if(!STORE.trainLessons) STORE.trainLessons = Object.keys(LESSONS).map(Number);
+  showScreen('configScreen');
+  document.getElementById('configLabel').innerHTML='&#9851; Oneindig trainen';
+  document.getElementById('configTitle').textContent='Welke lessen wil je mengen?';
+  document.getElementById('configIntro').innerHTML='Selecteer de lessen die in de eindeloze mix komen. Voeg later nieuwe lessen toe naarmate je vordert. Items die je fout hebt komen vaker terug.';
+  renderConfigChips();
+  showStartBar();
+}
+function openVerbConfig(){
+  configKind='verb';
+  if(!STORE.verbTenses) STORE.verbTenses = VERB_TENSES.map(t=>t.id);
+  showScreen('configScreen');
+  document.getElementById('configLabel').innerHTML='&#9889; Werkwoorden trainen';
+  document.getElementById('configTitle').textContent='Welke tijden wil je oefenen?';
+  document.getElementById('configIntro').innerHTML='Alle werkwoorden uit het boek (les 1&ndash;26) worden door elkaar gehusseld, gewogen op belangrijkheid. Fouten komen altijd terug tot je ze kent.';
+  renderConfigChips();
+  showStartBar();
+}
+
+function renderConfigChips(){
+  const c=document.getElementById('configChips');
+  if(configKind==='train'){
+    c.innerHTML=Object.keys(LESSONS).map(Number).map(num=>{
+      const on=STORE.trainLessons.includes(num)?'on':'';
+      const topic=findTopic(num);
+      return `<button class="sel-chip ${on}" onclick="toggleConfig(${num})">Les ${num}<br><span style="font-size:11px;font-weight:600;opacity:.75">${topic}</span></button>`;
+    }).join('');
+  } else {
+    c.innerHTML=VERB_TENSES.map(t=>{
+      const on=STORE.verbTenses.includes(t.id)?'on verbtense':'';
+      return `<button class="sel-chip tense-chip ${on}" style="flex:1 1 100%" onclick="toggleConfig('${t.id}')"><span>${t.label}</span><span class="tc-sub">${t.sub}</span></button>`;
+    }).join('');
+  }
+}
+function findTopic(num){ for(const u of UNITS){ for(const [n,t] of u.lessons){ if(n===num) return t; } } return ''; }
+
+function toggleConfig(id){
+  if(configKind==='train'){
+    const i=STORE.trainLessons.indexOf(id);
+    if(i>=0) STORE.trainLessons.splice(i,1); else STORE.trainLessons.push(id);
+  } else {
+    const i=STORE.verbTenses.indexOf(id);
+    if(i>=0) STORE.verbTenses.splice(i,1); else STORE.verbTenses.push(id);
+  }
+  renderConfigChips();
+  updateStartBar();
+}
+function configSelectAll(){
+  if(configKind==='train') STORE.trainLessons=Object.keys(LESSONS).map(Number);
+  else STORE.verbTenses=VERB_TENSES.map(t=>t.id);
+  renderConfigChips(); updateStartBar();
+}
+function configSelectNone(){
+  if(configKind==='train') STORE.trainLessons=[];
+  else STORE.verbTenses=[];
+  renderConfigChips(); updateStartBar();
+}
+function showStartBar(){
+  showCheckArea();
+  document.getElementById('skipBtn').style.display='none';
+  const b=document.getElementById('checkBtn');
+  b.className='check-btn'; b.onclick=startFromConfig;
+  updateStartBar();
+}
+function updateStartBar(){
+  const b=document.getElementById('checkBtn');
+  const cnt=configKind==='train'?STORE.trainLessons.length:STORE.verbTenses.length;
+  b.disabled=cnt===0;
+  b.textContent=cnt===0?'Selecteer minstens 1':'START &bull; '+cnt+(configKind==='train'?' lessen':' tijden');
+}
+function startFromConfig(){
+  document.getElementById('checkBtn').onclick=primaryButtonAction; // restore
+  if(configKind==='train') startTrain();
+  else startVerb();
+}
+
+// ═══════════════════ SESSION BUILDERS ═══════════════════
+function startLesson(num){
+  mode='lesson'; currentLessonNum=num;
+  const lesson=LESSONS[num]; if(!lesson) return;
+  queue=shuffle(lesson.exercises.map(ex=>({ex,lessonNum:num})));
+  beginSession();
+}
+function startReview(){
+  if(STORE.reviewQueue.length===0) return;
+  mode='review'; currentLessonNum=null;
+  const due=[...STORE.reviewQueue].sort((a,b)=>a.dueIn-b.dueIn).slice(0,15);
+  queue=due.map(d=>({ex:d.ex,lessonNum:d.lessonNum,_reviewRef:d}));
+  beginSession();
+}
+function startTrain(){
+  mode='train'; currentLessonNum=null;
+  const sel=STORE.trainLessons;
+  let all=[];
+  for(const num of sel){ if(LESSONS[num]) LESSONS[num].exercises.forEach(ex=>all.push({ex,lessonNum:num})); }
+  all.sort((a,b)=>{const ka=itemKey(a.ex,a.lessonNum),kb=itemKey(b.ex,b.lessonNum);return (STORE.correctStreak[ka]||0)-(STORE.correctStreak[kb]||0);});
+  queue=all; beginSession();
+}
+function startVerb(){
+  mode='verb'; currentLessonNum=null;
+  // Build a weighted, repeating queue of verb questions across selected tenses.
+  const tenses=STORE.verbTenses;
+  let items=[];
+  // Weight by freq (importance) — higher freq appears more times
+  VERBS.forEach(v=>{
+    const reps=Math.max(1, v.freq-2); // freq 5 -> 3 copies, freq 3 -> 1
+    for(let r=0;r<reps;r++){
+      tenses.forEach(t=>{
+        const q=buildVerbQuestion(v,t);
+        if(q) items.push({ex:q, lessonNum:'V', _verb:v.inf});
+      });
+    }
+  });
+  // prioritise low streak
+  items.sort((a,b)=>{const ka=a.ex._vkey,kb=b.ex._vkey;return (STORE.correctStreak[ka]||0)-(STORE.correctStreak[kb]||0);});
+  queue=items; beginSession();
+}
+
+function beginSession(){currentIndex=0;sessionCorrect=0;sessionWrong=0;wrongThisSession=[];showScreen('exerciseScreen');renderQuestion();window.scrollTo(0,0);}
+
+// ═══════════════════ VERB QUESTION GENERATOR ═══════════════════
+function buildVerbQuestion(v, tense){
+  const vkey = 'V::'+v.inf+'::'+tense;
+  if(tense==='meaning'){
+    // direction varies: NL->EN multiple choice
+    const distractors = shuffle(VERBS.filter(x=>x.inf!==v.inf)).slice(0,3).map(x=>x.en);
+    const opts = shuffle([v.en, ...distractors]);
+    return { type:'multiple_choice', _vkey:vkey,
+      question:`Wat betekent het werkwoord '${v.inf}'?`,
+      options:opts, correct:opts.indexOf(v.en),
+      explanation:`'${v.inf}' = ${v.en}.` + (v.irregular?' (onregelmatig werkwoord)':'') };
+  }
+  if(tense==='tt'){
+    // fill in hij-form (3rd person) — most error-prone
+    const ans = v.tt.hij;
+    if(ans==='-') return null;
+    return { type:'fill_blank', _vkey:vkey,
+      sentence:[`Tegenwoordige tijd — hij/zij: hij `, ` (${v.inf})`],
+      blank: ans, hint:`presente, 3ª pessoa de '${v.inf}' = ${v.en}`,
+      explanation:`hij ${ans} — '${v.inf}' (${v.en}). Ik-vorm: ${v.tt.ik}; jij-vorm: ${v.tt.jij}.` };
+  }
+  if(tense==='perf'){
+    if(!v.perf.pp) return null;
+    // multiple choice on participle + show aux
+    const distractors = shuffle(VERBS.filter(x=>x.perf.pp&&x.perf.pp!==v.perf.pp)).slice(0,3).map(x=>x.perf.pp);
+    const opts = shuffle([v.perf.pp, ...distractors]);
+    return { type:'multiple_choice', _vkey:vkey,
+      question:`Voltooid deelwoord van '${v.inf}' (${v.en})?`,
+      options:opts, correct:opts.indexOf(v.perf.pp),
+      explanation:`${v.perf.aux} + ${v.perf.pp}. Bijv: 'Ik ${v.perf.aux==='zijn'?'ben':'heb'} ${v.perf.pp}.'` };
+  }
+  if(tense==='ovt'){
+    // fill imperfect singular
+    const ans=v.ovt.sing;
+    return { type:'fill_blank', _vkey:vkey,
+      sentence:[`Verleden tijd (enkelvoud): ik `, ` (${v.inf})`],
+      blank: ans, hint:`pretérito singular de '${v.inf}' = ${v.en}`,
+      explanation:`ik ${ans} (enkelvoud), wij ${v.ovt.plur} (meervoud). '${v.inf}' = ${v.en}.`+(v.irregular?' Onregelmatig!':'') };
+  }
+  if(tense==='futur'){
+    // recognise future construction
+    const correct=`Ik ga ${v.inf}`;
+    const opts=shuffle([correct, `Ik ben ${v.inf}`, `Ik heb ${v.inf}`, `Ik word ${v.inf}`]);
+    return { type:'multiple_choice', _vkey:vkey,
+      question:`Hoe vorm je de toekomende tijd van '${v.inf}' (${v.en})?`,
+      options:opts, correct:opts.indexOf(correct),
+      explanation:`Toekomst: 'gaan' of 'zullen' + infinitief. 'Ik ga ${v.inf}' of 'Ik zal ${v.inf}'.` };
+  }
+  return null;
+}
+
+// ═══════════════════ RENDER QUESTION ═══════════════════
+function renderQuestion(){
+  isAnswered=false;selectedOption=null;fillAnswer='';wbWords=[];
+  matchedPairs=0;matchSideL=matchSideR=matchSideLPair=matchSideRPair=null;
+  hideFeedback();hideCheckArea();
+  if((mode==='train'||mode==='verb') && currentIndex>=queue.length){queue=shuffle(queue);currentIndex=0;}
+  if(currentIndex>=queue.length){showResults();return;}
+  const node=queue[currentIndex]; currentEx=node; const ex=node.ex; const total=queue.length;
+
+  const pb=document.getElementById('progressBar');
+  if(mode==='train'||mode==='verb'){
+    pb.style.width='100%'; pb.style.background=mode==='verb'?'var(--blue)':'var(--purple)';
+    document.getElementById('headerStat').innerHTML=(mode==='verb'?'&#9889; ':'&#9851; ')+(sessionCorrect+sessionWrong)+' gedaan';
+  } else {
+    pb.style.background=mode==='review'?'var(--orange)':'var(--green)';
+    pb.style.width=(currentIndex/total*100)+'%';
+    document.getElementById('headerStat').innerHTML='';
+  }
+
+  let label;
+  if(mode==='review') label=`Foutenrevisie &bull; ${currentIndex+1} / ${total}`;
+  else if(mode==='train') label=`Oneindig trainen &bull; Les ${node.lessonNum}`;
+  else if(mode==='verb') label=`Werkwoorden &bull; ${node._verb}`;
+  else label=`${LESSONS[node.lessonNum].title} &bull; ${currentIndex+1} / ${total}`;
+  document.getElementById('exLabel').innerHTML=label;
+
+  const badges={multiple_choice:'Meerkeuze',fill_blank:'Invullen',word_order:'Woordvolgorde',match_pairs:'Koppelen'};
+  const badge=document.getElementById('exTypeBadge');
+  badge.textContent=badges[ex.type]||ex.type;
+  badge.className='ex-type-badge'+(mode==='review'?' review':mode==='verb'?' verb':'');
+
+  let grammarHTML='';
+  if(mode==='lesson'&&currentIndex===0&&LESSONS[node.lessonNum].grammarTip){
+    const tip=LESSONS[node.lessonNum].grammarTip;
+    const rows=tip.table.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('');
+    const heads=tip.headers?`<tr>${tip.headers.map(h=>`<th>${h}</th>`).join('')}</tr>`:'';
+    grammarHTML=`<div class="grammar-tip"><strong>${tip.title}</strong><table>${heads}${rows}</table></div>`;
+  }
+
+  document.getElementById('exTitle').textContent=ex.question||'';
+  document.getElementById('exContent').innerHTML=grammarHTML+renderContent(ex);
+
+  showCheckArea();
+  const checkBtn=document.getElementById('checkBtn');
+  checkBtn.className='check-btn'; checkBtn.onclick=primaryButtonAction;
+  document.getElementById('skipBtn').style.display=(mode==='train'||mode==='verb')?'block':'none';
+  if(ex.type==='match_pairs'){totalPairs=ex.pairs.length;checkBtn.disabled=true;checkBtn.textContent=`Koppel alle ${totalPairs} paren`;}
+  else if(ex.type==='fill_blank'){checkBtn.disabled=true;checkBtn.textContent='CONTROLEER';setTimeout(()=>{const i=document.getElementById('blankInput');if(i)i.focus();},80);}
+  else{checkBtn.disabled=true;checkBtn.textContent='CONTROLEER';}
+}
+
+function renderContent(ex){
+  switch(ex.type){case 'multiple_choice':return renderMC(ex);case 'fill_blank':return renderFill(ex);case 'word_order':return renderWO(ex);case 'match_pairs':return renderMatch(ex);default:return'';}
+}
+function renderMC(ex){const L=['A','B','C','D','E'];return `<div class="options">${ex.options.map((o,i)=>`<button class="option-btn" data-idx="${i}" onclick="selectOption(${i})"><span class="opt-letter">${L[i]}</span>${o}</button>`).join('')}</div>`;}
+function renderFill(ex){return `<div class="fill-sentence">${ex.sentence[0]}<input class="blank-input" id="blankInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" oninput="onFill(this.value)" onkeydown="if(event.key==='Enter'&&!isAnswered&&fillAnswer)checkAnswer()"/>${ex.sentence[1]||''}</div>${ex.hint?`<div class="fill-hint">&#128161; ${ex.hint}</div>`:''}`;}
+function renderWO(ex){const chips=shuffle(ex.words.map((w,i)=>({w,i})));return `<div class="word-bank-sentence" id="wbSentence"><span style="color:var(--text-muted);font-size:15px">Tik op de woorden hieronder</span></div><div class="word-bank" id="wordBank">${chips.map(c=>`<button class="word-chip" data-idx="${c.i}" onclick="placeWord('${esc(c.w)}',${c.i})">${c.w}</button>`).join('')}</div>`;}
+function renderMatch(ex){const left=ex.pairs.map((p,i)=>({id:'L'+i,text:p.nl,pi:i}));const right=shuffle(ex.pairs.map((p,i)=>({id:'R'+i,text:p.en,pi:i})));return `<div class="match-grid"><div class="match-col">${left.map(it=>`<div class="match-chip" data-id="${it.id}" onclick="matchClick('${it.id}',${it.pi})">${it.text}</div>`).join('')}</div><div class="match-col">${right.map(it=>`<div class="match-chip" data-id="${it.id}" onclick="matchClick('${it.id}',${it.pi})">${it.text}</div>`).join('')}</div></div>`;}
+
+function selectOption(i){if(isAnswered)return;selectedOption=i;document.querySelectorAll('.option-btn').forEach((b,idx)=>b.classList.toggle('selected',idx===i));enableCheck();}
+function onFill(v){fillAnswer=v.trim();document.getElementById('checkBtn').disabled=fillAnswer.length===0;}
+function placeWord(w,idx){if(isAnswered)return;wbWords.push({w,idx});document.querySelector(`.word-chip[data-idx="${idx}"]`).classList.add('used');drawSentence();enableCheck();}
+function removeWord(pi){if(isAnswered)return;const r=wbWords.splice(pi,1)[0];document.querySelector(`.word-chip[data-idx="${r.idx}"]`).classList.remove('used');drawSentence();if(wbWords.length===0)document.getElementById('checkBtn').disabled=true;}
+function drawSentence(){const s=document.getElementById('wbSentence');if(!s)return;s.innerHTML=wbWords.length===0?'<span style="color:var(--text-muted);font-size:15px">Tik op de woorden hieronder</span>':wbWords.map((w,i)=>`<span class="word-placed" onclick="removeWord(${i})">${w.w}</span>`).join('');}
+function enableCheck(){const b=document.getElementById('checkBtn');b.disabled=false;b.textContent='CONTROLEER';}
+
+function matchClick(id,pi){
+  if(isAnswered)return;
+  const el=document.querySelector(`[data-id="${id}"]`);
+  if(!el||el.classList.contains('matched-correct'))return;
+  const isL=id.startsWith('L');
+  if(isL){if(matchSideL)document.querySelector(`[data-id="${matchSideL}"]`)?.classList.remove('selected');matchSideL=id;matchSideLPair=pi;}
+  else{if(matchSideR)document.querySelector(`[data-id="${matchSideR}"]`)?.classList.remove('selected');matchSideR=id;matchSideRPair=pi;}
+  el.classList.add('selected');
+  if(matchSideL&&matchSideR){
+    const lEl=document.querySelector(`[data-id="${matchSideL}"]`),rEl=document.querySelector(`[data-id="${matchSideR}"]`);
+    if(matchSideLPair===matchSideRPair){lEl.classList.remove('selected');rEl.classList.remove('selected');lEl.classList.add('matched-correct');rEl.classList.add('matched-correct');matchedPairs++;}
+    else{lEl.classList.add('matched-wrong');rEl.classList.add('matched-wrong');const a=matchSideL,b=matchSideR;setTimeout(()=>{document.querySelector(`[data-id="${a}"]`)?.classList.remove('matched-wrong','selected');document.querySelector(`[data-id="${b}"]`)?.classList.remove('matched-wrong','selected');},550);}
+    matchSideL=matchSideR=matchSideLPair=matchSideRPair=null;
+    if(matchedPairs===totalPairs){const b=document.getElementById('checkBtn');b.disabled=false;b.textContent='VERDER';b.className='check-btn flip';isAnswered=true;gradeSilently(true);}
+  }
+}
+
+function primaryButtonAction(){if(isAnswered){nextQuestion();return;}checkAnswer();}
+function skipQuestion(){if(isAnswered)return;const ex=currentEx.ex;isAnswered=true;const ct=answerText(ex);revealAnswer(ex,false);gradeSilently(false);showFeedback(false,ex.explanation,ct,true);}
+
+function checkAnswer(){
+  if(isAnswered)return;
+  const ex=currentEx.ex;let correct=false,correctText='';
+  if(ex.type==='multiple_choice'){
+    correct=selectedOption===ex.correct;correctText=ex.options[ex.correct];
+    document.querySelectorAll('.option-btn').forEach((b,i)=>{b.disabled=true;if(i===ex.correct)b.classList.add('correct');else if(i===selectedOption&&!correct)b.classList.add('wrong');});
+  }else if(ex.type==='fill_blank'){
+    const n=fillAnswer.toLowerCase().trim().replace(/[.,!?]$/,'');const c=ex.blank.toLowerCase().trim();
+    correct=n===c;correctText=ex.blank;
+    const inp=document.getElementById('blankInput');if(inp){inp.disabled=true;inp.classList.add(correct?'correct':'wrong');}
+  }else if(ex.type==='word_order'){
+    const placed=wbWords.map(w=>w.w).join(' ');correct=placed.toLowerCase()===ex.correct.toLowerCase();correctText=ex.correct;
+  }
+  isAnswered=true;grade(correct);showFeedback(correct,ex.explanation,correctText,!correct);
+}
+
+function answerText(ex){if(ex.type==='multiple_choice')return ex.options[ex.correct];if(ex.type==='fill_blank')return ex.blank;if(ex.type==='word_order')return ex.correct;if(ex.type==='match_pairs')return ex.pairs.map(p=>`${p.nl} = ${p.en}`).join(' • ');return'';}
+function revealAnswer(ex){if(ex.type==='multiple_choice'){document.querySelectorAll('.option-btn').forEach((b,i)=>{b.disabled=true;if(i===ex.correct)b.classList.add('correct');});}else if(ex.type==='fill_blank'){const inp=document.getElementById('blankInput');if(inp){inp.disabled=true;inp.value=ex.blank;inp.classList.add('correct');}}}
+
+function grade(correct){
+  const ex=currentEx.ex,ln=currentEx.lessonNum;
+  const key=ex._vkey||itemKey(ex,ln);
+  STORE.seenCount[key]=(STORE.seenCount[key]||0)+1;
+  if(correct){
+    sessionCorrect++;STORE.correctStreak[key]=(STORE.correctStreak[key]||0)+1;
+    if(currentEx._reviewRef){currentEx._reviewRef.streak=(currentEx._reviewRef.streak||0)+1;if(currentEx._reviewRef.streak>=2){STORE.reviewQueue=STORE.reviewQueue.filter(r=>r!==currentEx._reviewRef);}else{currentEx._reviewRef.dueIn=Date.now()+1;}}
+  }else{
+    sessionWrong++;STORE.correctStreak[key]=0;
+    wrongThisSession.push({q:ex.question||(ex.sentence?ex.sentence.join(' ___ '):'')||'Koppelen',a:answerText(ex)});
+    addToReview(ex,ln);
+  }
+  if(typeof ln==='number') updateMastery(ln);
+}
+function gradeSilently(correct){grade(correct);}
+function addToReview(ex,ln){
+  const key=ex._vkey||itemKey(ex,ln);
+  const existing=STORE.reviewQueue.find(r=>(r.ex._vkey||itemKey(r.ex,r.lessonNum))===key);
+  if(existing){existing.streak=0;existing.dueIn=Date.now();return;}
+  STORE.reviewQueue.push({ex,lessonNum:ln,dueIn:Date.now(),streak:0});
+}
+function updateMastery(ln){const lesson=LESSONS[ln];if(!lesson)return;let m=0;lesson.exercises.forEach(ex=>{if((STORE.correctStreak[itemKey(ex,ln)]||0)>=1)m++;});STORE.mastery[ln]=m/lesson.exercises.length;}
+
+function showFeedback(correct,explanation,correctAnswer){
+  hideCheckArea();
+  const panel=document.getElementById('feedbackPanel'),inner=document.getElementById('feedbackInner');
+  panel.classList.add('active');inner.className='feedback-inner '+(correct?'correct':'wrong');
+  document.getElementById('feedbackIcon').innerHTML=correct?'&#9989;':'&#10060;';
+  document.getElementById('feedbackTitle').textContent=correct?goodMsg():'Bijna! Let op:';
+  document.getElementById('feedbackAnswer').innerHTML=(!correct&&correctAnswer)?('Antwoord: '+correctAnswer):'';
+  document.getElementById('feedbackNote').textContent=explanation||'';
+  const btn=document.getElementById('continueBtn');btn.className='continue-btn'+(correct?'':' wrong-btn');btn.textContent='VERDER';btn.focus();
+}
+function hideFeedback(){document.getElementById('feedbackPanel').classList.remove('active');}
+function goodMsg(){const m=['Goed zo!','Uitstekend!','Correct!','Helemaal goed!','Knap gedaan!','Prima!'];return m[Math.floor(Math.random()*m.length)];}
+
+function nextQuestion(){hideFeedback();currentIndex++;renderQuestion();window.scrollTo(0,0);}
+
+function showResults(){
+  hideCheckArea();hideFeedback();showScreen('resultsScreen');document.getElementById('progressBar').style.width='100%';
+  const total=sessionCorrect+sessionWrong,inReview=STORE.reviewQueue.length;
+  document.getElementById('statCorrect').textContent=sessionCorrect;
+  document.getElementById('statWrong').textContent=sessionWrong;
+  document.getElementById('statReview').textContent=inReview;
+  let icon,title,sub;const pct=total>0?Math.round(sessionCorrect/total*100):0;
+  if(mode==='review'){icon='&#128260;';title='Revisie klaar!';sub=inReview>0?`Nog ${inReview} item(s). Items verdwijnen na 2x goed.`:'Geweldig — je foutenlijst is leeg!';}
+  else if(pct>=90){icon='&#127942;';title='Fantastisch!';sub='Sterke beheersing.';}
+  else if(pct>=70){icon='&#11088;';title='Goed gedaan!';sub='Je fouten staan klaar in de revisie.';}
+  else if(pct>=50){icon='&#128170;';title='Goed begin!';sub='Herhaal je fouten — zo beklijft het.';}
+  else{icon='&#128218;';title='Blijf oefenen!';sub='Herhaling is hoe het blijft hangen.';}
+  document.getElementById('resultIcon').innerHTML=icon;
+  document.getElementById('resultTitle').textContent=title;
+  document.getElementById('resultSubtitle').textContent=sub;
+  const cont=document.getElementById('reviewListContainer');
+  if(wrongThisSession.length>0){cont.innerHTML='<div class="section-label" style="text-align:left;max-width:480px;margin:0 auto 10px">Wat je fout had</div><div class="review-list">'+wrongThisSession.slice(0,8).map(w=>`<div class="review-item"><div class="ri-q">${w.q}</div><div class="ri-a">&#10003; ${w.a}</div></div>`).join('')+'</div>';}else{cont.innerHTML='';}
+  const pb=document.getElementById('resultPrimary');
+  if(STORE.reviewQueue.length>0){pb.innerHTML='&#128260; Oefen je fouten ('+STORE.reviewQueue.length+')';pb._action='review';}
+  else{pb.innerHTML='&#127968; Terug naar home';pb._action='home';}
+}
+function resultPrimaryAction(){const a=document.getElementById('resultPrimary')._action;if(a==='review')startReview();else goHome();}
+
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function esc(s){return String(s).replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+function showCheckArea(){document.getElementById('checkArea').classList.add('visible');}
+function hideCheckArea(){document.getElementById('checkArea').classList.remove('visible');}
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('feedbackPanel').classList.contains('active')){e.preventDefault();nextQuestion();}});
+renderHome();
+</script>
+</body>
+</html>
